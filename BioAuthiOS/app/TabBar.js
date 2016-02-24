@@ -34,8 +34,6 @@ export default class TabBar extends Component {
         tintColor= "white"
         barTintColor= "green"
         titleTextColor= "white"
-        translucent={false}
-        navigationBarHidden={false}
         initialRoute={{
           title: "Overview",
           component: OverviewPage
@@ -50,7 +48,6 @@ export default class TabBar extends Component {
         tintColor= "white"
         barTintColor= "green"
         titleTextColor= "white"
-        translucent={false}
         initialRoute={{
           title: "Transactions",
           component: TransactionsPage
@@ -65,7 +62,6 @@ export default class TabBar extends Component {
         tintColor= "white"
         barTintColor= "green"
         titleTextColor= "white"
-        translucent={false}
         initialRoute={{
           title: "Settings",
           component: SettingsPage
@@ -82,7 +78,6 @@ export default class TabBar extends Component {
 
         <TabBarIOS.Item
           title="Overview"
-          //icon={Icons.FeaturedIcon}
           selected={this.state.selectedTab === "OverviewTab"}
           onPress={() => {
             this.setState({
@@ -95,7 +90,6 @@ export default class TabBar extends Component {
 
         <TabBarIOS.Item
           title="Transactions"
-          //icon={Icons.NearbyIcon}
           selected={this.state.selectedTab === "TransactionsTab"}
           onPress={() => {
             this.setState({
@@ -108,7 +102,6 @@ export default class TabBar extends Component {
 
         <TabBarIOS.Item
           title="Settings"
-          //icon={Icons.ChatIcon}
           selected={this.state.selectedTab === "SettingsTab"}
           onPress={() => {
             this.setState({
