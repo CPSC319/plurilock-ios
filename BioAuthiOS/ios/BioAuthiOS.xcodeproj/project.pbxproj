@@ -23,6 +23,8 @@
 		2638D0401C805554003FEBB6 /* NotificationToDictionaryTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */; };
 		2638D0421C805585003FEBB6 /* LocalNotificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0411C805585003FEBB6 /* LocalNotificator.swift */; };
 		2638D0441C8056B4003FEBB6 /* LocalNotificatorBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0431C8056B4003FEBB6 /* LocalNotificatorBridge.m */; };
+		2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */; };
+		2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0471C806937003FEBB6 /* GestureLogger.swift */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +130,8 @@
 		2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationToDictionaryTransformer.swift; path = BioAuthiOS/NotificationToDictionaryTransformer.swift; sourceTree = "<group>"; };
 		2638D0411C805585003FEBB6 /* LocalNotificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalNotificator.swift; path = BioAuthiOS/LocalNotificator.swift; sourceTree = "<group>"; };
 		2638D0431C8056B4003FEBB6 /* LocalNotificatorBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalNotificatorBridge.m; path = BioAuthiOS/LocalNotificatorBridge.m; sourceTree = "<group>"; };
+		2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GestureLoggerBridge.m; path = BioAuthiOS/GestureLoggerBridge.m; sourceTree = "<group>"; };
+		2638D0471C806937003FEBB6 /* GestureLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GestureLogger.swift; path = BioAuthiOS/GestureLogger.swift; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,7 +248,9 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */,
 				2638D0411C805585003FEBB6 /* LocalNotificator.swift */,
+				2638D0471C806937003FEBB6 /* GestureLogger.swift */,
 				2638D0431C8056B4003FEBB6 /* LocalNotificatorBridge.m */,
+				2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */,
 			);
 			name = BioAuthiOS;
 			sourceTree = "<group>";
@@ -550,7 +556,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */,
+				2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */,
 				2638D0441C8056B4003FEBB6 /* LocalNotificatorBridge.m in Sources */,
+				2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */,
 				2638D0421C805585003FEBB6 /* LocalNotificator.swift in Sources */,
 				2638D0401C805554003FEBB6 /* NotificationToDictionaryTransformer.swift in Sources */,
 			);

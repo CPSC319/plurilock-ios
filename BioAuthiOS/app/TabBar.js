@@ -12,7 +12,7 @@ import React, {
 import OverviewPage from "./OverviewPage"
 import TransactionsPage from "./TransactionsPage"
 import SettingsPage from "./SettingsPage"
-import NotificationPage from "./NotificationPage"
+import PanGesturePage from "./PanGesturePage"
 
 const styles = StyleSheet.create({
   container: {
@@ -70,7 +70,7 @@ export default class TabBar extends Component {
     );
   }
 
-  renderNotificationsTab() {
+  renderPanGestureTab() {
     return (
       <NavigatorIOS
         style={styles.container}
@@ -78,8 +78,8 @@ export default class TabBar extends Component {
         barTintColor= "green"
         titleTextColor= "white"
         initialRoute={{
-          title: "Notifications",
-          component: NotificationPage
+          title: "PanGesture",
+          component: PanGesturePage
         }}/>
     );
   }
@@ -128,15 +128,15 @@ export default class TabBar extends Component {
         </TabBarIOS.Item>
 
         <TabBarIOS.Item
-          title="Notification API Test"
-          selected={this.state.selectedTab === "NotificationsTab"}
+          title="Pan Gesture Tab"
+          selected={this.state.selectedTab === "PanGestureTab"}
           onPress={() => {
             this.setState({
-              selectedTab: "NotificationsTab"
+              selectedTab: "PanGestureTab"
             });
           }}
           >
-          {this.renderNotificationsTab()}
+          {this.renderPanGestureTab()}
         </TabBarIOS.Item>
       </TabBarIOS>
     );
