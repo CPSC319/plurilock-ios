@@ -20,6 +20,9 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0331C804D31003FEBB6 /* AppDelegate.swift */; };
+		2638D0401C805554003FEBB6 /* NotificationToDictionaryTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */; };
+		2638D0421C805585003FEBB6 /* LocalNotificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0411C805585003FEBB6 /* LocalNotificator.swift */; };
+		2638D0441C8056B4003FEBB6 /* LocalNotificatorBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0431C8056B4003FEBB6 /* LocalNotificatorBridge.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +125,9 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioAuthiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		2638D0331C804D31003FEBB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = BioAuthiOS/AppDelegate.swift; sourceTree = "<group>"; };
+		2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationToDictionaryTransformer.swift; path = BioAuthiOS/NotificationToDictionaryTransformer.swift; sourceTree = "<group>"; };
+		2638D0411C805585003FEBB6 /* LocalNotificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalNotificator.swift; path = BioAuthiOS/LocalNotificator.swift; sourceTree = "<group>"; };
+		2638D0431C8056B4003FEBB6 /* LocalNotificatorBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalNotificatorBridge.m; path = BioAuthiOS/LocalNotificatorBridge.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -236,6 +242,9 @@
 				2638D0331C804D31003FEBB6 /* AppDelegate.swift */,
 				2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */,
+				2638D0411C805585003FEBB6 /* LocalNotificator.swift */,
+				2638D0431C8056B4003FEBB6 /* LocalNotificatorBridge.m */,
 			);
 			name = BioAuthiOS;
 			sourceTree = "<group>";
@@ -541,6 +550,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */,
+				2638D0441C8056B4003FEBB6 /* LocalNotificatorBridge.m in Sources */,
+				2638D0421C805585003FEBB6 /* LocalNotificator.swift in Sources */,
+				2638D0401C805554003FEBB6 /* NotificationToDictionaryTransformer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

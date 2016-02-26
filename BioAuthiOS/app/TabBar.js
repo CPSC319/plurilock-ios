@@ -12,6 +12,7 @@ import React, {
 import OverviewPage from "./OverviewPage"
 import TransactionsPage from "./TransactionsPage"
 import SettingsPage from "./SettingsPage"
+import NotificationPage from "./NotificationPage"
 
 const styles = StyleSheet.create({
   container: {
@@ -69,6 +70,20 @@ export default class TabBar extends Component {
     );
   }
 
+  renderNotificationsTab() {
+    return (
+      <NavigatorIOS
+        style={styles.container}
+        tintColor= "white"
+        barTintColor= "green"
+        titleTextColor= "white"
+        initialRoute={{
+          title: "Notifications",
+          component: NotificationPage
+        }}/>
+    );
+  }
+
   render() {
     return (
       <TabBarIOS
@@ -110,6 +125,18 @@ export default class TabBar extends Component {
           }}
           >
           {this.renderSettingsTab()}
+        </TabBarIOS.Item>
+
+        <TabBarIOS.Item
+          title="Notification API Test"
+          selected={this.state.selectedTab === "NotificationsTab"}
+          onPress={() => {
+            this.setState({
+              selectedTab: "NotificationsTab"
+            });
+          }}
+          >
+          {this.renderNotificationsTab()}
         </TabBarIOS.Item>
       </TabBarIOS>
     );

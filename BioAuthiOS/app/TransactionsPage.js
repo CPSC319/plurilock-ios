@@ -25,7 +25,7 @@ export default class TransactionsPage extends Component {
   render() {
     return(
       <View>
-      <Text style={styles.text}>TRANSACTION PAGE</Text>
+      <Text style={styles.text}>TRANSACTIONS PAGE</Text>
       </View>
     );
   }

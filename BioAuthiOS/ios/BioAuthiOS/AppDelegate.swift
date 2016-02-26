@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * on the same Wi-Fi network.
      */
     
-    var jsCodeLocation = NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios&dev=true")
+    let jsCodeLocation = NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios&dev=true")
     
     
     /**
@@ -54,4 +54,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     return true
   }
+  
+  func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+    RCTSharedApplication()!.cancelLocalNotification(notification)
+    self.bridge.eventDispatcher.sendAppEventWithName(String("didReceiveLocalNotification"), body: NotificationToDictionaryTransformer(notification: notification).transform())
+  }
+  
+  
 }

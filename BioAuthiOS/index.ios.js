@@ -6,10 +6,11 @@ import React, {
   Component,
   StyleSheet,
   Text,
-  View
+  View,
 } from 'react-native';
 
 import TabBar from "./app/TabBar"
+import {LocalNotificator} from 'NativeModules'
 
 class BioAuthiOS extends Component {
   render() {
@@ -37,5 +38,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+
+// request permissions
+LocalNotificator.requestPermissions();
 
 AppRegistry.registerComponent('BioAuthiOS', () => BioAuthiOS);
