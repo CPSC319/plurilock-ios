@@ -10,11 +10,13 @@ import React, {
   NativeAppEventEmitter,
   AlertIOS,
   TouchableOpacity,
+  TouchableHighlight,
   ListView,
   PanResponder
 } from 'react-native';
 
 import {GestureLogger} from 'NativeModules'
+import Swipeout from 'react-native-swipeout'
 
 const styles = StyleSheet.create({
   row: {
@@ -35,6 +37,8 @@ const styles = StyleSheet.create({
     marginBottom: 50
   }
 });
+
+
 
 export default class PanGesturePage extends Component {
 
@@ -94,21 +98,35 @@ export default class PanGesturePage extends Component {
             dataSource={this.state.dataSource}
             renderRow={this.renderRow}
             renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-            {...this._panResponder.panHandlers}
+
           />
 
       );
     }
 
     renderRow(rowData: string, sectionID: number, rowID: number) {
+      let swipeoutBtns = [
+        {
+          text: "RButton",
+          backgroundColor: "red"
+        },
+        {
+          text: "BButton",
+          backgroundColor: "blue"
+        }
+      ]
+
+
       return (
-          <View>
-            <View style={styles.row}>
+        <Swipeout right={swipeoutBtns}
+          autoClose='true'>
+            <View style={styles.row}
+              {...this._panResponder.panHandlers}>
               <Text style={styles.text}>
                 {rowData + ' - blah blah'}
               </Text>
             </View>
-          </View>
+        </Swipeout>
       );
     }
 
