@@ -61,7 +61,7 @@ export default class PanGesturePage extends Component {
 
         // The accumulated gesture distance since becoming responder is
         // gestureState.d{x,y}
-        GestureLogger.testSwiftMethod("Pan Move", gestureState)
+        GestureLogger.retrievePanGestureData("Pan Move", new Date().toString(), gestureState)
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {

@@ -12,8 +12,9 @@ import UIKit
 class GestureLogger: NSObject {
   
   
-  @objc func testSwiftMethod(paramOne: String, paramTwo: NSDictionary) -> Void {
-    print("param one: ", paramOne)
-    print("param two: ", paramTwo)
+  @objc func retrievePanGestureData(gestureType: String, timestamp: String, gestureData: NSDictionary) -> Void {
+    print("Gesture: ", gestureType)
+    print("Timestamp: ", timestamp)
+    print("Gesture Data: ", gestureData)
   }
 }

@@ -10,6 +10,6 @@
 
 @interface RCT_EXTERN_MODULE(GestureLogger, NSObject)
 
-RCT_EXTERN_METHOD(testSwiftMethod:(NSString *)paramOne paramTwo:(NSDictionary *)paramTwo)
+RCT_EXTERN_METHOD(retrievePanGestureData:(NSString *)gestureType timestamp:(NSString *)timestamp gestureData:(NSDictionary *)gestureData)
 
 @end
