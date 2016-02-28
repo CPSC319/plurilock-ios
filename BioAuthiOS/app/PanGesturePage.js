@@ -12,13 +12,18 @@ import React, {
   TouchableOpacity,
   TouchableHighlight,
   ListView,
-  PanResponder
+  PanResponder,
+  TextInput
 } from 'react-native';
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    flex: 1
+  },
   row: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -33,8 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   table: {
-    flex: 1,
-    marginBottom: 50
+    marginBottom: 50,
   }
 });
 
@@ -61,7 +65,7 @@ export default class PanGesturePage extends Component {
 
         // The accumulated gesture distance since becoming responder is
         // gestureState.d{x,y}
-        GestureLogger.retrievePanGestureData("Pan Move", new Date().toString(), gestureState)
+        GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState)
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
@@ -89,10 +93,17 @@ export default class PanGesturePage extends Component {
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
+      this.onTextChange = this.onTextChange.bind(this)
     }
 
     render() {
       return (
+          <View style={styles.container}>
+          <TextInput
+            style={{marginTop: 64, height: 60, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={this.onTextChange}
+            value={this.state.text}
+        />
           <ListView
             style={styles.table}
             dataSource={this.state.dataSource}
@@ -100,6 +111,7 @@ export default class PanGesturePage extends Component {
             renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
 
           />
+          </View>
 
       );
     }
@@ -118,7 +130,7 @@ export default class PanGesturePage extends Component {
 
 
       return (
-        <Swipeout right={swipeoutBtns}
+        <Swipeout left={swipeoutBtns} right={swipeoutBtns}
           autoClose='true'>
             <View style={styles.row}
               {...this._panResponder.panHandlers}>
@@ -136,5 +148,12 @@ export default class PanGesturePage extends Component {
         dataBlob.push('Row ' + ii);
       }
       return dataBlob;
+    }
+
+    onTextChange(text) {
+
+      //TODO: String comparison between old and new text inputs to find the new key entered
+      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text)
+      this.setState({text})
     }
 }
