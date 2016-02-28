@@ -16,8 +16,13 @@ class GestureLogger: NSObject {
     print("orientation portrait is: ", UIDevice.currentDevice().orientation.isPortrait)
     print("Timestamp: ", timestamp)
     print("Gesture Data: ", gestureData)
-    print(platform())
-    //form TouchData Object
+    var orientation = ""
+    if UIDevice.currentDevice().orientation.isPortrait {
+      orientation = "Portrait"
+    } else {
+      orientation = "Landscape"
+    }
+    _ = TouchData(appName: appName, timestamp: timestamp, deviceOrientation: orientation, gestureData: gestureData)
   }
   
   @objc func retrieveKeyData(appName: String, timestamp: String, keyData: String) {

@@ -19,6 +19,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		261B01631C8273FF008E7F76 /* TouchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B01621C8273FF008E7F76 /* TouchData.swift */; };
 		2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0331C804D31003FEBB6 /* AppDelegate.swift */; };
 		2638D0401C805554003FEBB6 /* NotificationToDictionaryTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */; };
 		2638D0421C805585003FEBB6 /* LocalNotificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0411C805585003FEBB6 /* LocalNotificator.swift */; };
@@ -125,6 +126,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BioAuthiOS/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BioAuthiOS/Info.plist; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		261B01621C8273FF008E7F76 /* TouchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchData.swift; sourceTree = "<group>"; };
 		2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioAuthiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		2638D0331C804D31003FEBB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = BioAuthiOS/AppDelegate.swift; sourceTree = "<group>"; };
 		2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationToDictionaryTransformer.swift; path = BioAuthiOS/NotificationToDictionaryTransformer.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				2638D03F1C805554003FEBB6 /* NotificationToDictionaryTransformer.swift */,
 				2638D0411C805585003FEBB6 /* LocalNotificator.swift */,
 				2638D0471C806937003FEBB6 /* GestureLogger.swift */,
+				261B01621C8273FF008E7F76 /* TouchData.swift */,
 				2638D0431C8056B4003FEBB6 /* LocalNotificatorBridge.m */,
 				2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */,
 			);
@@ -559,6 +562,7 @@
 				2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */,
 				2638D0441C8056B4003FEBB6 /* LocalNotificatorBridge.m in Sources */,
 				2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */,
+				261B01631C8273FF008E7F76 /* TouchData.swift in Sources */,
 				2638D0421C805585003FEBB6 /* LocalNotificator.swift in Sources */,
 				2638D0401C805554003FEBB6 /* NotificationToDictionaryTransformer.swift in Sources */,
 			);
