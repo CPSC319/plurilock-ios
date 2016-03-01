@@ -89,7 +89,8 @@ export default class PanGesturePage extends Component {
       const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
       this.state = {
-        dataSource: ds.cloneWithRows(this.createRows())
+        dataSource: ds.cloneWithRows(this.createRows()),
+        text: ""
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
@@ -151,8 +152,21 @@ export default class PanGesturePage extends Component {
 
     onTextChange(text) {
 
-      //TODO: String comparison between old and new text inputs to find the new key entered
-      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text)
+      if (text.length > this.state.text.length) {
+        var keyAddedToEnd = true
+        for (var i = 0; i< this.state.text.length; i++) {
+          if (text[i] != this.state.text[i]) {
+            GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text[i])
+            keyAddedToEnd = false
+          }
+        }
+
+        if (keyAddedToEnd) {
+          GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text[text.length-1])
+        }
+
+      }
+
       this.setState({text})
     }
 }

@@ -38,7 +38,7 @@ class KeyData: NSObject {
     print(self.appName!, "has detected new Key Input Data at:", self.timestamp!)
     print("Device Orientation:", self.deviceOrientation)
     print("Event Type:", self.eventCode)
-    print("Key Data:, ", self.keyData!)
+    print("Key Data:", self.keyData!)
 
   }
 }
