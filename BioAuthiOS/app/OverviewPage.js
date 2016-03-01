@@ -146,6 +146,7 @@ export default class OverviewPage extends Component {
             renderSectionHeader={this.renderSectionHeader}
             renderRow={this.renderRow}
             renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+            {...this._panResponder.panHandlers}
           />
           </View>
 
