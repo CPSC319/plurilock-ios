@@ -55,10 +55,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
-  func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-    RCTSharedApplication()!.cancelLocalNotification(notification)
-    self.bridge.eventDispatcher.sendAppEventWithName(String("didReceiveLocalNotification"), body: NotificationToDictionaryTransformer(notification: notification).transform())
-  }
-  
-  
 }
