@@ -109,7 +109,6 @@ export default class PanGesturePage extends Component {
             dataSource={this.state.dataSource}
             renderRow={this.renderRow}
             renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-
           />
           </View>
 

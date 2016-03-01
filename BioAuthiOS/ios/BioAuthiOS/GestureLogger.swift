@@ -11,23 +11,14 @@ import UIKit
 @objc(GestureLogger)
 class GestureLogger: NSObject {
   
-  
   @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary) -> Void {
-    print("orientation portrait is: ", UIDevice.currentDevice().orientation.isPortrait)
-    print("Timestamp: ", timestamp)
-    print("Gesture Data: ", gestureData)
-    var orientation = ""
-    if UIDevice.currentDevice().orientation.isPortrait {
-      orientation = "Portrait"
-    } else {
-      orientation = "Landscape"
-    }
-    _ = TouchData(appName: appName, timestamp: timestamp, deviceOrientation: orientation, gestureData: gestureData)
+    let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData)
+    td.printData()
   }
   
   @objc func retrieveKeyData(appName: String, timestamp: String, keyData: String) {
-    print("KEY IS: ", keyData)
-    //for KeyData Object
+    let kd = KeyData(appName: appName, timestamp: timestamp, keyData: keyData)
+    kd.printData()
   }
   
   func platform() -> String {
