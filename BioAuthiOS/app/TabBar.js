@@ -13,6 +13,7 @@ import OverviewPage from "./OverviewPage"
 import TransactionsPage from "./TransactionsPage"
 import SettingsPage from "./SettingsPage"
 import PanGesturePage from "./PanGesturePage"
+import MapviewPage from "./MapviewPage"
 
 const styles = StyleSheet.create({
   container: {
@@ -84,6 +85,21 @@ export default class TabBar extends Component {
     );
   }
 
+  renderMapviewTab() {
+    return (
+      <NavigatorIOS
+        style={styles.container}
+        tintColor= "white"
+        barTintColor= "green"
+        titleTextColor= "white"
+        initialRoute={{
+          title: "Map",
+          component: MapviewPage
+        }}/>
+    );
+  }
+
+
   render() {
     return (
       <TabBarIOS
@@ -138,6 +154,20 @@ export default class TabBar extends Component {
           >
           {this.renderPanGestureTab()}
         </TabBarIOS.Item>
+
+
+        <TabBarIOS.Item
+          title="Map"
+          selected={this.state.selectedTab === "MapviewTab"}
+          onPress={() => {
+            this.setState({
+              selectedTab: "MapviewTab"
+            });
+          }}
+          >
+          {this.renderMapviewTab()}
+        </TabBarIOS.Item>
+
       </TabBarIOS>
     );
   }
