@@ -19,6 +19,27 @@ import React, {
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
 
+const sampleData = [
+  ["Bank of Montreal Chequing...........................$6700",
+   "Bank of Montreal Savings.............................$15000",
+   "Bank of Montreal MasterCard.........................-$650",
+   "TD Canada Trust Chequing...........................$6700",
+    "TD Canada Trust Savings.............................$15000",
+    "TD Canada Trust Visa...................................-$650"],
+  ["Starbucks Coffee.............................................$4.46",
+   "Apple iPhone 6S........................................$1059.68",
+   "H&M............................................................$78.95",
+   "Miku Restaurant...........................................$114.46",
+    "Cineplex.......................................................$12.99",
+    "Save on Foods...............................................$28.95"],
+  ["Restaurants................................$195.54 remaining",
+  "Clothing......................................$21.05 remaining",
+  "Electronics...............................$859.68 over budget",
+  "Entertainment................................$95.54 remaining",
+  "Groceries......................................$21.05 remaining",
+  "Coffee Shops.................................$25.68 remaining"]
+]
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
@@ -28,7 +49,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: '#F6F6F6',
+    backgroundColor: 'white',
+    marginLeft: 10,
+    marginRight: 10,
   },
   separator: {
     height: 1,
@@ -39,6 +62,21 @@ const styles = StyleSheet.create({
   },
   table: {
     marginBottom: 50,
+    backgroundColor: "#dddddd"
+  },
+  sectionHeaderText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    flex: 1
+  },
+  sectionHeader: {
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: 'white',
   }
 });
 
@@ -86,28 +124,26 @@ export default class PanGesturePage extends Component {
 
     constructor(props) {
       super(props);
-      const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+      const ds = new ListView.DataSource({
+        rowHasChanged: (r1, r2) => r1 !== r2,
+        sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+      });
 
       this.state = {
-        dataSource: ds.cloneWithRows(this.createRows()),
-        text: ""
+        dataSource: ds.cloneWithRowsAndSections(this.createRows()),
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
-      this.onTextChange = this.onTextChange.bind(this)
+      this.renderSectionHeader = this.renderSectionHeader.bind(this)
     }
 
     render() {
       return (
           <View style={styles.container}>
-          <TextInput
-            style={{marginTop: 64, height: 60, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={this.onTextChange}
-            value={this.state.text}
-        />
           <ListView
             style={styles.table}
             dataSource={this.state.dataSource}
+            renderSectionHeader={this.renderSectionHeader}
             renderRow={this.renderRow}
             renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
           />
@@ -116,7 +152,49 @@ export default class PanGesturePage extends Component {
       );
     }
 
-    renderRow(rowData: string, sectionID: number, rowID: number) {
+    renderSectionHeader(rowData, sectionID, rowID) {
+      if (sectionID === "0") {
+        return this.renderAccountSection()
+      }
+
+      if (sectionID === "1") {
+        return this.renderRecentTransactionSection()
+      }
+
+      return this.renderBudgetSection()
+    }
+
+    renderAccountSection() {
+      return (
+        <View style={styles.sectionHeader}>
+        <Text style={styles.sectionHeaderText}>
+          {'Accounts'}
+        </Text>
+        </View>
+      )
+    }
+
+    renderRecentTransactionSection() {
+      return (
+        <View style={styles.sectionHeader}>
+        <Text style={styles.sectionHeaderText}>
+          {'Recent Transactions'}
+        </Text>
+        </View>
+      )
+    }
+
+    renderBudgetSection() {
+      return (
+        <View style={styles.sectionHeader}>
+        <Text style={styles.sectionHeaderText}>
+          {'Budget '}
+        </Text>
+        </View>
+      )
+    }
+
+    renderRow(rowData: string) {
       let swipeoutBtns = [
         {
           text: "RButton",
@@ -128,6 +206,9 @@ export default class PanGesturePage extends Component {
         }
       ]
 
+      var data = sampleData[rowData.section][rowData.row]
+
+
 
       return (
         <Swipeout left={swipeoutBtns} right={swipeoutBtns}
@@ -135,7 +216,7 @@ export default class PanGesturePage extends Component {
             <View style={styles.row}
               {...this._panResponder.panHandlers}>
               <Text style={styles.text}>
-                {rowData + ' - blah blah'}
+                {data}
               </Text>
             </View>
         </Swipeout>
@@ -143,30 +224,25 @@ export default class PanGesturePage extends Component {
     }
 
     createRows() {
-      var dataBlob = [];
-      for (var ii = 0; ii < 50; ii++) {
-        dataBlob.push('Row ' + ii);
+      const dataBlob = [];
+
+      const listLength = 10;
+
+      // dataBlob[ 0 ] = new Array(1);
+      // dataBlob[ 1 ] = new Array(listLength);
+
+      for (let ii = 0; ii < 3; ii++) {
+          dataBlob[ ii ] = new Array(6);
+        for (let j = 0; j < dataBlob[ ii ].length; j++) {
+
+          dataBlob[ ii ][ j ] =
+          {
+            section: ii,
+            row: j
+          };
+        }
       }
       return dataBlob;
     }
 
-    onTextChange(text) {
-
-      if (text.length > this.state.text.length) {
-        var keyAddedToEnd = true
-        for (var i = 0; i< this.state.text.length; i++) {
-          if (text[i] != this.state.text[i]) {
-            GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text[i])
-            keyAddedToEnd = false
-          }
-        }
-
-        if (keyAddedToEnd) {
-          GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text[text.length-1])
-        }
-
-      }
-
-      this.setState({text})
-    }
 }

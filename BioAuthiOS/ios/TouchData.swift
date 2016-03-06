@@ -81,12 +81,12 @@ class TouchData: NSObject {
       self.eventCode = EventCode.SwipeLeft
     }
     
-    if self.velocity_y < 0 {
+    if self.velocity_y > 0 {
       self.strokeOrientation = StrokeOrientation.Down
       self.eventCode = EventCode.SwipeDown
     }
     
-    if self.velocity_y > 0 {
+    if self.velocity_y < 0 {
       self.strokeOrientation = StrokeOrientation.Up
       self.eventCode = EventCode.SwipeUp
     }
