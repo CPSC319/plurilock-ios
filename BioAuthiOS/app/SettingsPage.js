@@ -1,74 +1,87 @@
-/*
-*/
+"use strict";
 
-'use strict';
 import React, {
+  SliderIOS,
+  ListView,
+  View,
   Component,
   StyleSheet,
-  Text,
-  View,
-  TextInput
-} from 'react-native';
+  Text
+} from "react-native";
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  wrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e9e9e9',
+    marginTop: 20
+  },
+  textView: {
+    marginLeft: 20,
+    marginBottom: 10
+  },
   text: {
-    color: "black",
-    alignSelf: "center",
-    marginTop: 200
+    fontSize: 24,
+    fontWeight: '100',
+    color: 'black',
+  },
+  slider: {
+    height: 20,
+    width: 325,
+    margin: 6
   }
-})
-
-import {GestureLogger} from 'NativeModules'
+});
 
 export default class SettingsPage extends Component {
-
-  constructor(props) {
-    super(props);
-
+  constructor() {
+    super();
+    var testData = [{settingName:"Range", type:"Slider"}, {settingName:"Help", type:"Text"}, {settingName:"Acknowledgements", type:"Text"}]
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      text: ""
+      dataSource: ds.cloneWithRows(testData),
+      value: 0,
     };
-
-    this.onTextChange = this.onTextChange.bind(this)
   }
 
+  renderRow(rowData, sectionID, rowID) {
+    if (rowData.type == "Slider") {
+      return (
+        <View style={styles.wrapper}>
+          <View style={styles.textView}>
+            <Text>{rowData.settingName}</Text>
+            <SliderIOS style={styles.slider}
+              minimumValue={0}
+              maximumValue={1}
+              onValueChange={(value) => this.setState({value: value})}
+            />
+          </View>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.wrapper}>
+          <View style={styles.textView}>
+            <Text>{rowData.settingName}</Text>
+          </View>
+        </View>
+      );
+    }
+  }
 
   render() {
-    return(
-      <View>
-      <Text style={styles.text}>SETTINGS PAGE</Text>
-
-      <TextInput
-                  style={{marginTop: 64, height: 60, borderColor: 'gray', borderWidth: 1}}
-                  onChangeText={this.onTextChange}
-                  value={this.state.text}
-      />
+    return (
+      <View style={styles.container}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)}
+        />
       </View>
     );
   }
-
-
-      onTextChange(text) {
-
-        if (text.length > this.state.text.length) {
-          var keyAddedToEnd = true
-          for (var i = 0; i< this.state.text.length; i++) {
-            if (text[i] != this.state.text[i]) {
-              GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text[i])
-              keyAddedToEnd = false
-            }
-          }
-
-          if (keyAddedToEnd) {
-            GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), text[text.length-1])
-          }
-
-        }
-
-        this.setState({text})
-      }
-
 }
