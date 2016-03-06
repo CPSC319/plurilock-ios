@@ -9,6 +9,7 @@ import React, {
   Component
 } from "react-native";
 
+var { Icon, } = require('react-native-icons');
 import OverviewPage from "./OverviewPage"
 import TransactionsPage from "./TransactionsPage"
 import SettingsPage from "./SettingsPage"
@@ -118,10 +119,11 @@ export default class TabBar extends Component {
           >
           {this.renderOverviewTab()}
         </TabBarIOS.Item>
-
         <TabBarIOS.Item
           title="Transactions"
           selected={this.state.selectedTab === "TransactionsTab"}
+          iconName={'ion|ios-home-outline'}
+          selectedIconName={'ion|ios-home'}
           onPress={() => {
             this.setState({
               selectedTab: "TransactionsTab"
