@@ -171,6 +171,12 @@ budget: {
   half:  {
       flex: 2,
       flexDirection: "row",
+  },
+  addButtonText: {
+    textAlign: "right",
+    color: "green",
+    fontSize: 18,
+    fontWeight: "bold"
   }
 });
 
@@ -230,6 +236,7 @@ export default class OverviewPage extends Component {
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
       this.renderSectionHeader = this.renderSectionHeader.bind(this)
+      this.addAccount = this.addAccount.bind(this)
     }
 
     render() {
@@ -265,14 +272,26 @@ export default class OverviewPage extends Component {
       return (
         <View>
         <View style={styles.sectionHeader}>
+        <View style={{flex: 2, flexDirection: "row"}}>
         <Text style={styles.sectionHeaderText}>
           {'Accounts'}
         </Text>
+        <View style={styles.Tab}></View>
+        <TouchableHighlight onPress={this.addAccount} underlayColor={"white"}>
+        <Text style={styles.addButtonText}>
+          {'+'}
+        </Text>
+        </TouchableHighlight>
+        </View>
 <View style={styles.sectionHeaderSeparator}></View>
         </View>
 
         </View>
       )
+    }
+
+    addAccount() {
+
     }
 
     renderRecentTransactionSection() {

@@ -9,6 +9,7 @@
     "react-native": "^0.20.0",
     "react-native-device-uuid": "^1.2.0",
     "react-native-icons": "^0.7.1",
+    "react-native-popover": "^0.2.0",
     "react-native-swipeout": "^2.0.12"
   },
   "devDependencies": {
