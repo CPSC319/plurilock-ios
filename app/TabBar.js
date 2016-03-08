@@ -10,11 +10,13 @@ import React, {
 } from "react-native";
 
 var { Icon, } = require('react-native-icons');
-import OverviewPage from "./OverviewPage"
-import TransactionsPage from "./TransactionsPage"
-import SettingsPage from "./SettingsPage"
-import PanGesturePage from "./PanGesturePage"
-import MapviewPage from "./MapviewPage"
+
+import DeviceInfo from "react-native-device-info";
+import OverviewPage from "./OverviewPage";
+import TransactionsPage from "./TransactionsPage";
+import SettingsPage from "./SettingsPage";
+import PanGesturePage from "./PanGesturePage";
+import MapviewPage from "./MapviewPage";
 
 const styles = StyleSheet.create({
   container: {
@@ -30,9 +32,20 @@ const mapIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAMAAABrr
 export default class TabBar extends Component {
   constructor(props) {
     super(props);
+    this.logDeviceInfo();
     this.state = {
       selectedTab: "OverviewTab"
     };
+  }
+
+  logDeviceInfo() {
+    console.log("Device Unique ID: " + DeviceInfo.getUniqueID());
+    console.log("Device Manufacturer: " + DeviceInfo.getManufacturer());
+    console.log("Device Model: " + DeviceInfo.getModel());
+    console.log("Device Version: " + DeviceInfo.getSystemVersion());
+    console.log("App Version: " + DeviceInfo.getVersion());
+    console.log("Device Name: " + DeviceInfo.getDeviceName());
+    console.log("Device Locale: " + DeviceInfo.getDeviceLocale());
   }
 
   renderOverviewTab() {

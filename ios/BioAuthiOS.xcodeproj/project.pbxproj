@@ -24,6 +24,7 @@
 		2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0331C804D31003FEBB6 /* AppDelegate.swift */; };
 		2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */; };
 		2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0471C806937003FEBB6 /* GestureLogger.swift */; };
+		53229E641C8ECCDB00757087 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53229E631C8ECCAF00757087 /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		F807FD991C86287F00FF9A3C /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F807FD981C86285B00FF9A3C /* libReactNativeIcons.a */; };
 		F807FDB01C862A3700FF9A3C /* FAKFontAwesome.h in Resources */ = {isa = PBXBuildFile; fileRef = F807FD9B1C8628BE00FF9A3C /* FAKFontAwesome.h */; };
@@ -113,6 +114,13 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		53229E621C8ECCAF00757087 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
+			remoteInfo = RNDeviceInfo;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -159,6 +167,7 @@
 		2638D0331C804D31003FEBB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = BioAuthiOS/AppDelegate.swift; sourceTree = "<group>"; };
 		2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GestureLoggerBridge.m; path = BioAuthiOS/GestureLoggerBridge.m; sourceTree = "<group>"; };
 		2638D0471C806937003FEBB6 /* GestureLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GestureLogger.swift; path = BioAuthiOS/GestureLogger.swift; sourceTree = "<group>"; };
+		53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		F807FD891C86285A00FF9A3C /* ReactNativeIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeIcons.xcodeproj; path = "../node_modules/react-native-icons/ios/ReactNativeIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -197,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53229E641C8ECCDB00757087 /* libRNDeviceInfo.a in Frameworks */,
 				F807FD991C86287F00FF9A3C /* libReactNativeIcons.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -312,6 +322,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		53229E541C8ECCAE00757087 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				53229E631C8ECCAF00757087 /* libRNDeviceInfo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +341,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */,
 				F807FD891C86285A00FF9A3C /* ReactNativeIcons.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -516,6 +535,10 @@
 					ProductGroup = F807FD8A1C86285A00FF9A3C /* Products */;
 					ProjectRef = F807FD891C86285A00FF9A3C /* ReactNativeIcons.xcodeproj */;
 				},
+				{
+					ProductGroup = 53229E541C8ECCAE00757087 /* Products */;
+					ProjectRef = 53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -580,6 +603,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		53229E631C8ECCAF00757087 /* libRNDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNDeviceInfo.a;
+			remoteRef = 53229E621C8ECCAF00757087 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
