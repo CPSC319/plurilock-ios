@@ -79,7 +79,7 @@ export default class MapviewPage extends Component {
 
   render() {
     return(
-      <View 
+      <View
         style={styles.container}
         {...this._panResponder.panHandlers}
       >
@@ -102,8 +102,18 @@ export default class MapviewPage extends Component {
     return [{
       longitude: region.longitude,
       latitude: region.latitude,
-      title: 'You Are Here',
-    }];
+      title: 'Bank of Montreal',
+    },
+    {
+      longitude: region.longitude+0.001,
+      latitude: region.latitude-0.001,
+      title: 'TD Canada Trust',
+    },
+    {
+      longitude: region.longitude+0.002,
+      latitude: region.latitude+0.005,
+      title: 'Royal Bank of Canada',
+    } ];
   }
 
   _onRegionChange(region) {
@@ -141,9 +151,8 @@ var styles = StyleSheet.create({
   },
   map: {
     padding: 1,
-    height: height*0.9,
-    margin: 10,
-    borderWidth: 1,
+    height: height,
+    marginTop: 10,
     borderColor: '#000000',
   },
 });

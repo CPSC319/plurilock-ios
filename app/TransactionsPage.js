@@ -14,7 +14,8 @@ import React, {
   TouchableHighlight,
   ListView,
   PanResponder,
-  TextInput
+  TextInput,
+  Modal
 } from 'react-native';
 
 import {GestureLogger} from 'NativeModules'
@@ -23,18 +24,18 @@ import Swipeout from 'react-native-swipeout'
 var ProgressBar = require('react-native-progress-bar');
 
 var budgets = [
-  ["Entertainment", 67, 100],
-  ["Restaurants", 150, 200],
-  ["Electronics", 450, 500]
+  ["Entertainment", 45, 100],
+  ["Restaurants", 90, 200],
+  ["Electronics", 225, 500]
 ]
 
 var transactions = [
   ["Starbucks Coffee", 4.76, "Restaurants"],
   ["Apple iPhone 6S", 1029.99, "Electronics"],
   ["Scotiabank Theatre", 12.99, "Entertainment"],
-  ["Starbucks Coffee", 4.76, "Restaurants"],
-  ["Apple iPhone 6S", 1029.99, "Electronics"],
-  ["Scotiabank Theatre", 12.99, "Entertainment"]
+  ["Reboot Cafe", 8.79, "Restaurants"],
+  ["Apple Silicon Case for iPhone 6S", 39.99, "Electronics"],
+  ["Miku Restaurant", 128.59, "Restaurant"]
 ]
 
 const styles = StyleSheet.create({
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 0,
     marginTop: 10
 },
-accountRow:{
+transactionRow:{
   flex: 2,
   flexDirection: 'row',
   paddingLeft: 15,
@@ -98,12 +99,12 @@ accountRow:{
   marginLeft: 12,
   marginRight: 12
 },
-accountName: {
+transactionName: {
   textAlign: "left",
   color: "#545454"
 
 },
-accountValue: {
+transactionValue: {
   textAlign: "right",
   color: "green"
 },
@@ -173,7 +174,36 @@ budget: {
   half:  {
       flex: 2,
       flexDirection: "row",
+  },
+  addButtonText: {
+    textAlign: "right",
+    color: "green",
+    fontSize: 18,
+    fontWeight: "bold"
+  },
+  modalButton: {
+    textAlign: "center",
+    marginTop: 20,
+    color: "green",
+    fontSize: 18,
+    fontWeight: "bold"
+  },
+  newtransactionField: {
+    height: 64,
+    borderColor: "grey",
+    borderWidth: 1,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20,
+    padding: 10
+  },
+  newtransactionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 100
   }
+
 });
 
 
@@ -227,16 +257,59 @@ export default class TransactionsPage extends Component {
 
       this.state = {
         dataSource: ds.cloneWithRowsAndSections(this.createRows()),
-        progress: 0.45
+        progress: 0.45,
+        modalVisible: false,
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
+      this.addtransaction = this.addtransaction.bind(this)
+      this._setModalVisible = this._setModalVisible.bind(this)
+      this.closeModal = this.closeModal.bind(this)
+      this.onKeyPress = this.onKeyPress.bind(this)
+      this.ontransactionNameChange = this.ontransactionNameChange.bind(this)
+      this.ontransactionAmountChange = this.ontransactionAmountChange.bind(this)
+      this.onCategoryNameChange = this.onCategoryNameChange.bind(this)
+
     }
+
+    _setModalVisible(visible) {
+  this.setState({modalVisible: visible});
+  }
 
     render() {
 
+
+            var modalBackgroundStyle = {
+              backgroundColor: 'rgba(255, 255, 255, 0.9)'
+            };
+      var innerContainerTransparentStyle = this.state.transparent
+        ? {backgroundColor: '#fff', padding: 20}
+        : null;
+
       return (
           <View style={styles.container}>
+
+          <Modal
+                    animated={true}
+                    transparent={true}
+                    visible={this.state.modalVisible}>
+                    <View style={[styles.container, modalBackgroundStyle]}>
+                      <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
+                        <Text style={styles.newtransactionTitle}>{"Enter a new transaction"}</Text>
+                        <TextInput style={styles.newtransactionField} onChangeText={this.ontransactionNameChange}
+                        onKeyPress={this.onKeyPress} value={this.state.transactionName} placeholder={"Enter transaction name"}/>
+                        <TextInput style={styles.newtransactionField} onChangeText={this.onCategoryNameChange}
+                        onKeyPress={this.onKeyPress} value={this.state.categoryName} placeholder={"Enter category name"}/>
+                        <TextInput style={styles.newtransactionField} onChangeText={this.ontransactionAmountChange}
+                        onKeyPress={this.onKeyPress} value={this.state.transactionAmount} keyboardType={'decimal-pad'} placeholder={"Enter transaction balance"}/>
+                        <TouchableOpacity
+                          onPress={this.closeModal}>
+                          <Text style={styles.modalButton}>{"Submit"}</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+          </Modal>
+
           <ListView
             style={styles.table}
             dataSource={this.state.dataSource}
@@ -250,12 +323,35 @@ export default class TransactionsPage extends Component {
       );
     }
 
+
+        addtransaction() {
+          this._setModalVisible(true)
+        }
+
+        closeModal() {
+          if (this.state.transactionName != "" && this.state.transactionAmount != "" && this.state.categoryName != "") {
+            transactions.push([this.state.transactionName, this.state.transactionAmount, this.state.categoryName])
+            this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(this.createRows())})
+            this.setState({transactionName: "", transactionAmount: "", categoryName: ""})
+          }
+          this.setState({ progress: this.state.progress + 0.0000001})
+          this._setModalVisible(false)
+        }
+
     renderTransactionSection() {
       return (
         <View style={styles.sectionHeader}>
+        <View style={{flex: 2, flexDirection: "row"}}>
         <Text style={styles.sectionHeaderText}>
           {'Transactions'}
         </Text>
+        <View style={styles.Tab}></View>
+        <TouchableHighlight onPress={this.addtransaction} underlayColor={"white"}>
+        <Text style={styles.addButtonText}>
+          {'+'}
+        </Text>
+        </TouchableHighlight>
+        </View>
         <View style={styles.sectionHeaderSeparator}></View>
         </View>
       )
@@ -288,13 +384,13 @@ export default class TransactionsPage extends Component {
         return this.renderTransactionSection()
       }
       return (
-        <View style={styles.accountRow}>
-          <Text style={styles.accountName}>
+        <View style={styles.transactionRow}>
+          <Text style={styles.transactionName}>
             {transactions[row][0]}{"\n"}
             <Text style={styles.transactionCategory}>{transactions[row][2]}</Text>
           </Text>
           <View style={styles.Tab}></View>
-          <Text style={styles.accountValue}>${transactions[row][1]}</Text>
+          <Text style={styles.transactionValue}>${transactions[row][1]}</Text>
         </View>
       )
     }
@@ -304,12 +400,13 @@ export default class TransactionsPage extends Component {
       if (row === -1) {
         return this.renderBudgetSection()
       }
+      //var progress = budgets[row][1]/budgets[row][2]
 
-      setTimeout((function() {
-        this.setState({ progress: this.state.progress + 0.0000001});
-      }).bind(this), 2000);
+      // setTimeout((function() {
+      //   this.setState({ progress: this.state.progress + 0.0000001});
+      // }).bind(this), 2000);
 
-
+      //this.setState({progress: this.state.progress})
       return (
               <View style={styles.budget}  >
               <View style={styles.halfbg}>
@@ -353,6 +450,22 @@ export default class TransactionsPage extends Component {
         }
       }
       return dataBlob;
+    }
+
+    ontransactionNameChange(transactionName) {
+        this.setState({transactionName})
+    }
+
+    onCategoryNameChange(categoryName) {
+        this.setState({categoryName})
+    }
+
+    ontransactionAmountChange(transactionAmount) {
+        this.setState({transactionAmount})
+    }
+
+    onKeyPress(e) {
+      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key)
     }
 
 }
@@ -418,7 +531,7 @@ export default class TransactionsPage extends Component {
 //     fontWeight: 'bold',
 //     justifyContent: "flex-end",
 //   },
-//   account: {
+//   transaction: {
 //
 //   },
 //   recent: {
@@ -529,7 +642,7 @@ export default class TransactionsPage extends Component {
 //         <Text style={styles.bodymsg}>Suspicious login detected from 192.168.2.1{"\n"}You can't afford to live in Vancouver yet</Text>
 //       </View>
 //       <View style={styles.subconts}>
-//         <Text style={styles.header}>Accounts</Text>
+//         <Text style={styles.header}>transactions</Text>
 //         <View style={styles.halfb}>
 //             <Text style={styles.bodymsghf}>{"\n"}Checking{"\n\n"}Savings{"\n\n"}AMEX Black</Text>
 //             <View style={styles.Tab}></View>

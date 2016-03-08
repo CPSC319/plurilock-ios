@@ -201,8 +201,6 @@ budget: {
     textAlign: "center",
     marginTop: 100
   }
-
-
 });
 
 
@@ -264,7 +262,6 @@ export default class OverviewPage extends Component {
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
-      this.renderSectionHeader = this.renderSectionHeader.bind(this)
       this.addAccount = this.addAccount.bind(this)
       this._setModalVisible = this._setModalVisible.bind(this)
       this.closeModal = this.closeModal.bind(this)
@@ -366,7 +363,9 @@ var innerContainerTransparentStyle = this.state.transparent
         this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(this.createRows())})
         this.setState({accountName: "", accountAmount: ""})
       }
+
       this._setModalVisible(false)
+
     }
 
     renderRecentTransactionSection() {
@@ -392,16 +391,7 @@ var innerContainerTransparentStyle = this.state.transparent
     }
 
     renderRow(rowData: string) {
-      let swipeoutBtns = [
-        {
-          text: "RButton",
-          backgroundColor: "red"
-        },
-        {
-          text: "BButton",
-          backgroundColor: "blue"
-        }
-      ]
+
 
       if (rowData.section === 0) {
         return this.renderAlert()
@@ -424,12 +414,21 @@ var innerContainerTransparentStyle = this.state.transparent
         return this.renderAccountSection()
       }
 
+      let swipeoutBtns = [
+        {
+          text: "Delete",
+          backgroundColor: "red"
+        }
+      ]
+
       return (
+        <Swipeout left={swipeoutBtns} right={swipeoutBtns}>
         <View style={styles.accountRow}>
           <Text style={styles.accountName}>{accounts[row][0]}</Text>
           <View style={styles.Tab}></View>
           <Text style={styles.accountValue}>${accounts[row][1]}</Text>
         </View>
+        </Swipeout>
       )
     }
 
@@ -456,9 +455,9 @@ var innerContainerTransparentStyle = this.state.transparent
         return this.renderBudgetSection()
       }
 
-      setTimeout((function() {
-        this.setState({ progress: this.state.progress + 0.0000001});
-      }).bind(this), 2000);
+      // setTimeout((function() {
+      //   this.setState({ progress: this.state.progress + 0.0000001});
+      // }).bind(this), 2000);
 
 
       return (
