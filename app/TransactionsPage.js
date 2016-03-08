@@ -333,6 +333,7 @@ export default class TransactionsPage extends Component {
       const dataBlob = [];
       var listLength;
 
+
       for (let ii = 0; ii < 2; ii++) {
         if (ii === 0) {
           listLength = transactions.length+1

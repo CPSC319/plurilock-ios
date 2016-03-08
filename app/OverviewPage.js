@@ -14,7 +14,8 @@ import React, {
   TouchableHighlight,
   ListView,
   PanResponder,
-  TextInput
+  TextInput,
+  Modal
 } from 'react-native';
 
 import {GestureLogger} from 'NativeModules'
@@ -177,7 +178,31 @@ budget: {
     color: "green",
     fontSize: 18,
     fontWeight: "bold"
+  },
+  modalButton: {
+    textAlign: "center",
+    marginTop: 20,
+    color: "green",
+    fontSize: 18,
+    fontWeight: "bold"
+  },
+  newAccountField: {
+    height: 64,
+    borderColor: "grey",
+    borderWidth: 1,
+    marginLeft: 20,
+    marginRight: 20,
+    marginTop: 20,
+    padding: 10
+  },
+  newAccountTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop: 100
   }
+
+
 });
 
 
@@ -231,18 +256,59 @@ export default class OverviewPage extends Component {
 
       this.state = {
         dataSource: ds.cloneWithRowsAndSections(this.createRows()),
-        progress: 0.45
+        progress: 0.45,
+        modalVisible: false,
+        accounts: accounts,
+        accountName: "",
+        accountAmount: "",
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
       this.renderSectionHeader = this.renderSectionHeader.bind(this)
       this.addAccount = this.addAccount.bind(this)
-    }
+      this._setModalVisible = this._setModalVisible.bind(this)
+      this.closeModal = this.closeModal.bind(this)
+      this.onKeyPress = this.onKeyPress.bind(this)
+      this.onAccountNameChange = this.onAccountNameChange.bind(this)
+      this.onAccountAmountChange = this.onAccountAmountChange.bind(this)
+      }
+
+    _setModalVisible(visible) {
+  this.setState({modalVisible: visible});
+  }
 
     render() {
 
+      var modalBackgroundStyle = {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)'
+      };
+var innerContainerTransparentStyle = this.state.transparent
+  ? {backgroundColor: '#fff', padding: 20}
+  : null;
+
       return (
           <View style={styles.container}>
+
+          <Modal
+                    animated={true}
+                    transparent={true}
+                    visible={this.state.modalVisible}>
+                    <View style={[styles.container, modalBackgroundStyle]}>
+                      <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
+                        <Text style={styles.newAccountTitle}>{"Enter a new account"}</Text>
+                        <TextInput style={styles.newAccountField} onChangeText={this.onAccountNameChange}
+                        onKeyPress={this.onKeyPress} value={this.state.accountName} placeholder={"Enter Account Name"}/>
+                        <TextInput style={styles.newAccountField} onChangeText={this.onAccountAmountChange}
+                        onKeyPress={this.onKeyPress} value={this.state.accountAmount} keyboardType={'decimal-pad'} placeholder={"Enter Account Balance"}/>
+                        <TouchableOpacity
+                          onPress={this.closeModal}>
+                          <Text style={styles.modalButton}>{"Submit"}</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+          </Modal>
+
+
           <ListView
             style={styles.table}
             dataSource={this.state.dataSource}
@@ -291,7 +357,16 @@ export default class OverviewPage extends Component {
     }
 
     addAccount() {
+      this._setModalVisible(true)
+    }
 
+    closeModal() {
+      if (this.state.accountName != "" && this.state.accountAmount != "") {
+        accounts.push([this.state.accountName, this.state.accountAmount])
+        this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(this.createRows())})
+        this.setState({accountName: "", accountAmount: ""})
+      }
+      this._setModalVisible(false)
     }
 
     renderRecentTransactionSection() {
@@ -438,6 +513,8 @@ export default class OverviewPage extends Component {
 
       var listLength = accounts.length+1;
 
+      console.log("CREATING ACCOUNTS: "+accounts)
+
       // dataBlob[ 0 ] = new Array(1);
       // dataBlob[ 1 ] = new Array(listLength);
 
@@ -448,6 +525,7 @@ export default class OverviewPage extends Component {
 
         if (ii === 1) {
           listLength = accounts.length+1;
+          console.log("CREATING ACCOUNT ROWS OF LENGTH: "+listLength)
         }
 
         if (ii === 2) {
@@ -468,6 +546,18 @@ export default class OverviewPage extends Component {
         }
       }
       return dataBlob;
+    }
+
+    onAccountNameChange(accountName) {
+        this.setState({accountName})
+    }
+
+    onAccountAmountChange(accountAmount) {
+        this.setState({accountAmount})
+    }
+
+    onKeyPress(e) {
+      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key)
     }
 
 }
