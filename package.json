@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "react-native": "^0.20.0",
+    "react-native-device-info": "^0.8.4",
     "react-native-icons": "^0.7.1",
     "react-native-swipeout": "^2.0.12"
   },
