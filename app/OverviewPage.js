@@ -20,25 +20,18 @@ import React, {
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
 
-const sampleData = [
-  ["Bank of Montreal Chequing...........................$6700",
-   "Bank of Montreal Savings.............................$15000",
-   "Bank of Montreal MasterCard.........................-$650",
-   "TD Canada Trust Chequing...........................$6700",
-    "TD Canada Trust Savings.............................$15000",
-    "TD Canada Trust Visa...................................-$650"],
-  ["Starbucks Coffee.............................................$4.46",
-   "Apple iPhone 6S........................................$1059.68",
-   "H&M............................................................$78.95",
-   "Miku Restaurant...........................................$114.46",
-    "Cineplex.......................................................$12.99",
-    "Save on Foods...............................................$28.95"],
-  ["Restaurants................................$195.54 remaining",
-  "Clothing......................................$21.05 remaining",
-  "Electronics...............................$859.68 over budget",
-  "Entertainment................................$95.54 remaining",
-  "Groceries......................................$21.05 remaining",
-  "Coffee Shops.................................$25.68 remaining"]
+var ProgressBar = require('react-native-progress-bar');
+
+var accounts = [
+  ["BMO Chequing", 6700],
+  ["TD Savings", 15000],
+  ["AMEX Black", 293000]
+]
+
+var recentTransactions = [
+  ["Starbucks Coffee", 4.76, "Restaurants"],
+  ["Apple iPhone 6S", 1029.99, "Electronics"],
+  ["Scotiabank Theatre", 12.99, "Entertainment"]
 ]
 
 const styles = StyleSheet.create({
@@ -49,19 +42,22 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 10,
+    padding: 15,
     backgroundColor: 'white',
-    marginLeft: 10,
-    marginRight: 10,
+    marginLeft: 12,
+    marginRight: 12,
   },
   separator: {
     height: 1,
-    backgroundColor: '#CCCCCC',
+    backgroundColor: 'white',
+    marginLeft: 12,
+    marginRight: 12
   },
   text: {
     flex: 1,
   },
   table: {
+    marginTop: 20,
     marginBottom: 50,
     backgroundColor: "#dddddd"
   },
@@ -72,12 +68,109 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    flexDirection: 'row',
+    marginLeft: 12,
+    marginRight: 12,
+    flexDirection: 'column',
     justifyContent: 'center',
-    padding: 10,
+    padding: 15,
     backgroundColor: 'white',
+  },
+  sectionHeaderSeparator:{
+    flex: 2,
+    flexDirection: "column",
+    borderWidth: 1,
+    borderColor: "#545454",
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    marginTop: 10
+},
+accountRow:{
+  flex: 2,
+  flexDirection: 'row',
+  paddingLeft: 15,
+  paddingRight: 15,
+  padding: 12,
+  backgroundColor: 'white',
+  marginLeft: 12,
+  marginRight: 12
+},
+accountName: {
+  textAlign: "left",
+  color: "#545454"
+
+},
+accountValue: {
+  textAlign: "right",
+  color: "green"
+},
+Tab:{
+  flexDirection: 'row',
+  flex: 1,
+  width:200,
+  justifyContent: 'space-between',
+  padding:5,
+},
+transactionCategory: {
+  fontSize: 12,
+  color: "#bdbdbd",
+},
+halfbg:  {
+ flexDirection: "row",
+},
+money: {
+    fontSize:12,
+    color: "green"
+},
+bodymsg: {
+  marginBottom: 10,
+  color: "#545454"
+},
+budget: {
+    marginLeft: 12,
+    marginRight: 12,
+    backgroundColor: 'white',
+      padding: 20,
+      marginBottom:50,
+    },
+    alert: {
+        backgroundColor: '#ffae1a',
+        padding: 5,
+        paddingLeft: 7,
+        paddingRight: 7,
+        borderWidth: 1,
+        borderRadius: 2,
+        borderColor: "#FFC04D",
+    },
+    alrtmsg: {
+        lineHeight: 17,
+        color: "white"
+    },
+    headerl: {
+      fontSize: 18,
+      marginBottom: 10,
+      fontWeight: 'bold',
+      justifyContent: "space-between",
+    },
+    subconts: {
+        marginTop: 10,
+        marginLeft: 12,
+        marginRight: 12,
+        backgroundColor: 'white',
+          padding: 20
+    },
+    halfb:  {
+      flex: 2,
+      flexDirection: "row",
+      borderWidth: 1,
+      borderColor: "#545454",
+      borderBottomWidth: 0,
+      borderLeftWidth: 0,
+      borderRightWidth: 0,
+  },
+  half:  {
+      flex: 2,
+      flexDirection: "row",
   }
 });
 
@@ -132,6 +225,7 @@ export default class OverviewPage extends Component {
 
       this.state = {
         dataSource: ds.cloneWithRowsAndSections(this.createRows()),
+        progress: 0.45
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
@@ -139,14 +233,15 @@ export default class OverviewPage extends Component {
     }
 
     render() {
+
       return (
           <View style={styles.container}>
           <ListView
             style={styles.table}
             dataSource={this.state.dataSource}
-            renderSectionHeader={this.renderSectionHeader}
             renderRow={this.renderRow}
-            renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+            renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} />}
+            stickyHeaderIndices={[]}
             {...this._panResponder.panHandlers}
           />
           </View>
@@ -156,7 +251,7 @@ export default class OverviewPage extends Component {
 
     renderSectionHeader(rowData, sectionID, rowID) {
       if (sectionID === "0") {
-        return this.renderAccountSection()
+        return (<View/>) //this.renderAccountSection()
       }
 
       if (sectionID === "1") {
@@ -168,10 +263,14 @@ export default class OverviewPage extends Component {
 
     renderAccountSection() {
       return (
+        <View>
         <View style={styles.sectionHeader}>
         <Text style={styles.sectionHeaderText}>
           {'Accounts'}
         </Text>
+<View style={styles.sectionHeaderSeparator}></View>
+        </View>
+
         </View>
       )
     }
@@ -182,6 +281,7 @@ export default class OverviewPage extends Component {
         <Text style={styles.sectionHeaderText}>
           {'Recent Transactions'}
         </Text>
+        <View style={styles.sectionHeaderSeparator}></View>
         </View>
       )
     }
@@ -190,8 +290,9 @@ export default class OverviewPage extends Component {
       return (
         <View style={styles.sectionHeader}>
         <Text style={styles.sectionHeaderText}>
-          {'Budget '}
+          {'Monthly Budget '}
         </Text>
+        <View style={styles.sectionHeaderSeparator}></View>
         </View>
       )
     }
@@ -208,33 +309,136 @@ export default class OverviewPage extends Component {
         }
       ]
 
-      var data = sampleData[rowData.section][rowData.row]
+      if (rowData.section === 0) {
+        return this.renderAlert()
+      }
 
+      if (rowData.section === 1) {
+        return this.renderAccountRows(rowData)
+      }
+
+      if (rowData.section === 2) {
+        return this.renderRecentTransactionRows(rowData)
+      }
+
+      return this.renderBudgetRows(rowData)
+    }
+
+    renderAccountRows(rowData: string) {
+      var row = rowData.row-1
+      if (row === -1) {
+        return this.renderAccountSection()
+      }
+
+      return (
+        <View style={styles.accountRow}>
+          <Text style={styles.accountName}>{accounts[row][0]}</Text>
+          <View style={styles.Tab}></View>
+          <Text style={styles.accountValue}>${accounts[row][1]}</Text>
+        </View>
+      )
+    }
+
+    renderRecentTransactionRows(rowData: string) {
+      var row = rowData.row-1
+      if (row === -1) {
+        return this.renderRecentTransactionSection()
+      }
+      return (
+        <View style={styles.accountRow}>
+          <Text style={styles.accountName}>
+            {recentTransactions[row][0]}{"\n"}
+            <Text style={styles.transactionCategory}>{recentTransactions[row][2]}</Text>
+          </Text>
+          <View style={styles.Tab}></View>
+          <Text style={styles.accountValue}>${recentTransactions[row][1]}</Text>
+        </View>
+      )
+    }
+
+    renderBudgetRows(rowData: string) {
+      var row = rowData.row-1
+      if (row === -1) {
+        return this.renderBudgetSection()
+      }
+
+      setTimeout((function() {
+        this.setState({ progress: this.state.progress + 0.0000001});
+      }).bind(this), 2000);
 
 
       return (
-        <Swipeout left={swipeoutBtns} right={swipeoutBtns}
-          autoClose='true'>
-            <View style={styles.row}
-              {...this._panResponder.panHandlers}>
-              <Text style={styles.text}>
-                {data}
-              </Text>
-            </View>
-        </Swipeout>
-      );
+              <View style={styles.budget}  >
+              <View style={styles.halfbg}>
+                  <Text style={styles.bodymsg}>March Budget</Text>
+                  <View style={styles.Tab}></View>
+              <Text style={styles.money}>$324 out of $720</Text>
+              </View>
+              <ProgressBar
+                fillStyle={{height: 40, backgroundColor: "green"}}
+                backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
+                style={{marginTop: 0, width: 349, height: 40}}
+                progress={this.state.progress}
+              />
+              </View>
+      )
     }
+
+    renderAlert() {
+      return(
+        <View style={styles.subconts}>
+          <View style={styles.half}>
+          <Text style={styles.headerl}>Alerts</Text>
+          <View style={styles.Tab}></View>
+          <View style={styles.alert}>
+          <Text style={styles.alrtmsg}>2</Text>
+          </View>
+          </View>
+          <Text style={styles.bodymsg}>Suspicious login detected from 192.168.2.1{"\n"}"You can't afford to live in Vancouver yet"</Text>
+        </View>
+      )
+    }
+
+      //var data = sampleData[rowData.section][rowData.row]
+      //
+      // return (
+      //   <Swipeout left={swipeoutBtns} right={swipeoutBtns}
+      //     autoClose='true'>
+      //       <View style={styles.row}
+      //         {...this._panResponder.panHandlers}>
+      //         <Text style={styles.text}>
+      //           {data}
+      //         </Text>
+      //       </View>
+      //   </Swipeout>
+      // );
+    //}
 
     createRows() {
       const dataBlob = [];
 
-      const listLength = 10;
+      var listLength = accounts.length+1;
 
       // dataBlob[ 0 ] = new Array(1);
       // dataBlob[ 1 ] = new Array(listLength);
 
-      for (let ii = 0; ii < 3; ii++) {
-          dataBlob[ ii ] = new Array(6);
+      for (let ii = 0; ii < 4; ii++) {
+        if (ii === 0) {
+          listLength = 1
+        }
+
+        if (ii === 1) {
+          listLength = accounts.length+1;
+        }
+
+        if (ii === 2) {
+          listLength = recentTransactions.length+1
+        }
+
+        if (ii === 3) {
+          listLength = 2
+        }
+          dataBlob[ ii ] = new Array(listLength);
         for (let j = 0; j < dataBlob[ ii ].length; j++) {
 
           dataBlob[ ii ][ j ] =
