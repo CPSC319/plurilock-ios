@@ -11,9 +11,12 @@ import UIKit
 @objc(GestureLogger)
 class GestureLogger: NSObject {
   
-  @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary) -> Void {
+  @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary, callback: RCTResponseSenderBlock) -> Void {
     let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData)
+   
     td.printData()
+    callback([["data": "callback string"]])
+    return
   }
   
   @objc func retrieveKeyData(appName: String, timestamp: String, keyData: String) {
