@@ -24,6 +24,9 @@
 		2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0331C804D31003FEBB6 /* AppDelegate.swift */; };
 		2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */; };
 		2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0471C806937003FEBB6 /* GestureLogger.swift */; };
+		26A17B221C97D02F00C938F6 /* ServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A17B211C97D02F00C938F6 /* ServerController.swift */; };
+		26A17B441C97D32900C938F6 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A17B391C97D2F800C938F6 /* Starscream.framework */; };
+		26A17B461C97D39100C938F6 /* Starscream.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 26A17B391C97D2F800C938F6 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53229E641C8ECCDB00757087 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53229E631C8ECCAF00757087 /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		F807FD991C86287F00FF9A3C /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F807FD981C86285B00FF9A3C /* libReactNativeIcons.a */; };
@@ -114,6 +117,48 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		26A17B381C97D2F800C938F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6B3E79E619D48B7F006071F7;
+			remoteInfo = "Starscream iOS";
+		};
+		26A17B3A1C97D2F800C938F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6B3E79F119D48B7F006071F7;
+			remoteInfo = "Starscream iOSTests";
+		};
+		26A17B3C1C97D2F800C938F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D9C3E35F19E48FF1009FC285;
+			remoteInfo = "Starscream OSX";
+		};
+		26A17B3E1C97D2F800C938F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D9C3E36919E48FF1009FC285;
+			remoteInfo = "Starscream OSXTests";
+		};
+		26A17B401C97D2F800C938F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 091277971BD673A70003036D;
+			remoteInfo = "Starscream tvOS";
+		};
+		26A17B421C97D2F800C938F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 091277A01BD673A70003036D;
+			remoteInfo = "Starscream tvOSTests";
+		};
 		53229E621C8ECCAF00757087 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */;
@@ -144,6 +189,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		26A17B451C97D36F00C938F6 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				26A17B461C97D39100C938F6 /* Starscream.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -167,6 +226,8 @@
 		2638D0331C804D31003FEBB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = BioAuthiOS/AppDelegate.swift; sourceTree = "<group>"; };
 		2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GestureLoggerBridge.m; path = BioAuthiOS/GestureLoggerBridge.m; sourceTree = "<group>"; };
 		2638D0471C806937003FEBB6 /* GestureLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GestureLogger.swift; path = BioAuthiOS/GestureLogger.swift; sourceTree = "<group>"; };
+		26A17B211C97D02F00C938F6 /* ServerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerController.swift; sourceTree = "<group>"; };
+		26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Starscream.xcodeproj; path = "../../../../Downloads/Starscream-master/Starscream.xcodeproj"; sourceTree = "<group>"; };
 		53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -206,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26A17B441C97D32900C938F6 /* Starscream.framework in Frameworks */,
 				53229E641C8ECCDB00757087 /* libRNDeviceInfo.a in Frameworks */,
 				F807FD991C86287F00FF9A3C /* libReactNativeIcons.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -304,6 +366,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				2638D0331C804D31003FEBB6 /* AppDelegate.swift */,
+				26A17B211C97D02F00C938F6 /* ServerController.swift */,
 				2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				2638D0471C806937003FEBB6 /* GestureLogger.swift */,
@@ -318,6 +381,19 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		26A17B301C97D2F800C938F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				26A17B391C97D2F800C938F6 /* Starscream.framework */,
+				26A17B3B1C97D2F800C938F6 /* Starscream iOSTests.xctest */,
+				26A17B3D1C97D2F800C938F6 /* Starscream.framework */,
+				26A17B3F1C97D2F800C938F6 /* Starscream OSXTests.xctest */,
+				26A17B411C97D2F800C938F6 /* Starscream.framework */,
+				26A17B431C97D2F800C938F6 /* Starscream tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -341,6 +417,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */,
 				53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */,
 				F807FD891C86285A00FF9A3C /* ReactNativeIcons.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -453,6 +530,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				26A17B451C97D36F00C938F6 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -539,6 +617,10 @@
 					ProductGroup = 53229E541C8ECCAE00757087 /* Products */;
 					ProjectRef = 53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */;
 				},
+				{
+					ProductGroup = 26A17B301C97D2F800C938F6 /* Products */;
+					ProjectRef = 26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -603,6 +685,48 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26A17B391C97D2F800C938F6 /* Starscream.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Starscream.framework;
+			remoteRef = 26A17B381C97D2F800C938F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26A17B3B1C97D2F800C938F6 /* Starscream iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starscream iOSTests.xctest";
+			remoteRef = 26A17B3A1C97D2F800C938F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26A17B3D1C97D2F800C938F6 /* Starscream.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Starscream.framework;
+			remoteRef = 26A17B3C1C97D2F800C938F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26A17B3F1C97D2F800C938F6 /* Starscream OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starscream OSXTests.xctest";
+			remoteRef = 26A17B3E1C97D2F800C938F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26A17B411C97D2F800C938F6 /* Starscream.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Starscream.framework;
+			remoteRef = 26A17B401C97D2F800C938F6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		26A17B431C97D2F800C938F6 /* Starscream tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starscream tvOSTests.xctest";
+			remoteRef = 26A17B421C97D2F800C938F6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		53229E631C8ECCAF00757087 /* libRNDeviceInfo.a */ = {
@@ -707,6 +831,7 @@
 			files = (
 				2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */,
 				2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */,
+				26A17B221C97D02F00C938F6 /* ServerController.swift in Sources */,
 				262503EF1C85499100BB9374 /* KeyData.swift in Sources */,
 				2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */,
 				261B01631C8273FF008E7F76 /* TouchData.swift in Sources */,
