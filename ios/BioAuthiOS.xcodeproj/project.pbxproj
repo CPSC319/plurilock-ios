@@ -19,6 +19,7 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		2616A92A1C98F7CF00D955C2 /* ServerConnectionBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2616A9291C98F7CF00D955C2 /* ServerConnectionBridge.m */; };
 		261B01631C8273FF008E7F76 /* TouchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B01621C8273FF008E7F76 /* TouchData.swift */; };
 		262503EF1C85499100BB9374 /* KeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262503EE1C85499100BB9374 /* KeyData.swift */; };
 		2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0331C804D31003FEBB6 /* AppDelegate.swift */; };
@@ -220,6 +221,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BioAuthiOS/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BioAuthiOS/Info.plist; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		2616A9291C98F7CF00D955C2 /* ServerConnectionBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnectionBridge.m; sourceTree = "<group>"; };
 		261B01621C8273FF008E7F76 /* TouchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchData.swift; sourceTree = "<group>"; };
 		262503EE1C85499100BB9374 /* KeyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyData.swift; sourceTree = "<group>"; };
 		2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioAuthiOS-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				262503EE1C85499100BB9374 /* KeyData.swift */,
 				261B01621C8273FF008E7F76 /* TouchData.swift */,
 				2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */,
+				2616A9291C98F7CF00D955C2 /* ServerConnectionBridge.m */,
 			);
 			name = BioAuthiOS;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 			files = (
 				2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */,
 				2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */,
+				2616A92A1C98F7CF00D955C2 /* ServerConnectionBridge.m in Sources */,
 				26A17B221C97D02F00C938F6 /* ServerController.swift in Sources */,
 				262503EF1C85499100BB9374 /* KeyData.swift in Sources */,
 				2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */,

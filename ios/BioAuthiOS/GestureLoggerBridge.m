@@ -10,7 +10,7 @@
 
 @interface RCT_EXTERN_MODULE(GestureLogger, NSObject)
 
-RCT_EXTERN_METHOD(retrievePanGestureData:(NSString *)appName timestamp:(NSString *)timestamp gestureData:(NSDictionary *)gestureData callback:(RCTResponseSenderBlock)callback)
+RCT_EXTERN_METHOD(retrievePanGestureData:(NSString *)appName timestamp:(NSString *)timestamp gestureData:(NSDictionary *)gestureData)
 
 RCT_EXTERN_METHOD(retrieveKeyData:(NSString *)appName timestamp:(NSString *)timestamp keyData:(NSString *)keyData)
 

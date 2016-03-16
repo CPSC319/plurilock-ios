@@ -20,7 +20,6 @@ import React, {
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
-import ServerSocket from './ServerSocket'
 
 var ProgressBar = require('react-native-progress-bar');
 
@@ -227,11 +226,7 @@ export default class OverviewPage extends Component {
 
         // The accumulated gesture distance since becoming responder is
         // gestureState.d{x,y}
-        GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
-          console.log(callback)
-          var ss = new ServerSocket()
-          //send to server
-        })
+        GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState)
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {

@@ -9,6 +9,7 @@
 import Foundation
 import Starscream
 
+@objc(ServerController)
 class ServerController: NSObject, WebSocketDelegate {
   
   var socket = WebSocket(url: NSURL(string: "ws://btdemo.plurilock.com:8095")!)
@@ -18,9 +19,11 @@ class ServerController: NSObject, WebSocketDelegate {
     //let socket = WebSocket(url: NSURL(string: "ws://btdemo.plurilock.com:8095")!)
     print("CREATING SOCKET")
     socket.delegate = self
-    
+  }
+  
+  @objc func connectToServer(str: String) {
+    print("CONNECTING TO SERVER ", str)
     socket.connect()
-    socket.writeString("HELLO WORLD")
   }
   
   func websocketDidConnect(socket: WebSocket) {
