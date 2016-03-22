@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Starscream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,6 +52,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     self.window!.rootViewController = rootViewController;
     self.window!.makeKeyAndVisible()
+    
+    
+    
+    //Connect to Plurilock servers
+//    let sc = ServerController()
+//    
+//    
+//    if sc.getConnectionStatus() {
+//      print("OMG CONNECTED")
+//    } else {
+//      print("FML")
+//    }
     
     return true
   }

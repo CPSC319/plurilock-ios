@@ -13,7 +13,9 @@ class GestureLogger: NSObject {
   
   @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary) -> Void {
     let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData)
+   
     td.printData()
+    return
   }
   
   @objc func retrieveKeyData(appName: String, timestamp: String, keyData: String) {

@@ -90,8 +90,8 @@ export default class MapviewPage extends Component {
           onRegionChangeComplete={this._onRegionChangeComplete}
           region={this.state.mapRegion}
           annotations={this.state.annotations}
-          //showsUserLocation={true}
-          //followUserLocation={true}
+          showsUserLocation={true}
+          followUserLocation={true}
         />
 
       </View>

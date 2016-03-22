@@ -512,11 +512,6 @@ var innerContainerTransparentStyle = this.state.transparent
 
       var listLength = accounts.length+1;
 
-      console.log("CREATING ACCOUNTS: "+accounts)
-
-      // dataBlob[ 0 ] = new Array(1);
-      // dataBlob[ 1 ] = new Array(listLength);
-
       for (let ii = 0; ii < 4; ii++) {
         if (ii === 0) {
           listLength = 1
@@ -524,7 +519,6 @@ var innerContainerTransparentStyle = this.state.transparent
 
         if (ii === 1) {
           listLength = accounts.length+1;
-          console.log("CREATING ACCOUNT ROWS OF LENGTH: "+listLength)
         }
 
         if (ii === 2) {
