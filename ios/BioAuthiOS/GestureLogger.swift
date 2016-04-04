@@ -1,4 +1,4 @@
-//
+
 //  GestureLogger.swift
 //  BioAuthiOS
 //
@@ -11,10 +11,12 @@ import UIKit
 @objc(GestureLogger)
 class GestureLogger: NSObject {
   
-  @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary) -> Void {
+  @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary, callback: RCTResponseSenderBlock) -> Void {
     let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData)
    
     td.printData()
+    let json = td.packageForServer()
+    callback([json])
     return
   }
   

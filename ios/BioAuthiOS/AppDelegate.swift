@@ -56,14 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     //Connect to Plurilock servers
-//    let sc = ServerController()
-//    
-//    
-//    if sc.getConnectionStatus() {
-//      print("OMG CONNECTED")
-//    } else {
-//      print("FML")
-//    }
+    //let server = ServerController()
+    //server.connectToServer("connecting from app delegate")
     
     return true
   }

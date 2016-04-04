@@ -57,7 +57,7 @@
 //         </View>
 //     );
 //   }
-  
+
 
 // }
 
@@ -87,11 +87,11 @@
 
 var React = require('react-native');
 
-import ExNavigator from '@exponent/react-native-navigator';
+//import ExNavigator from '@exponent/react-native-navigator';
 
-var Button = require('react-native-button');
+//var Button = require('react-native-button');
 var YourRouter = require('./app/route.js');
-
+import MainPage from './app/MainPage'
 
 
 
@@ -104,12 +104,13 @@ var {
 class BioAuthiOS extends React.Component {
   render() {
     return (
-      <ExNavigator
-        initialRoute={YourRouter.getHomeRoute()}
-        style={{ flex: 1 }}
-        sceneStyle={{ paddingTop: 20}}
-        showNavigationBar={false}
-      />
+      <MainPage/>
+      // <ExNavigator
+      //   initialRoute={YourRouter.getHomeRoute()}
+      //   style={{ flex: 1 }}
+      //   sceneStyle={{ paddingTop: 20}}
+      //   showNavigationBar={false}
+      // />
     );
   }
 }

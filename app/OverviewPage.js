@@ -20,6 +20,7 @@ import React, {
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
+//import ServerConnection from './ServerConnection'
 
 var ProgressBar = require('react-native-progress-bar');
 
@@ -208,6 +209,30 @@ budget: {
 export default class OverviewPage extends Component {
 
   componentWillMount() {
+    var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
+    ws.onopen = () => {
+      // connection opened
+    console.log("CONNECTING TO SERVER")
+    ws.send('something');
+    ws.send('something');
+    ws.send('something');
+    ws.send('something');
+  };
+
+     ws.onmessage = (e) => {
+       // a message was received
+       console.log(e.data);
+  };
+
+     ws.onerror = (e) => {
+       // an error occurred
+       console.log(e.message);
+  };
+
+     ws.onclose = (e) => {
+       // connection closed
+       console.log(e.code, e.reason);
+  };
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -226,7 +251,13 @@ export default class OverviewPage extends Component {
 
         // The accumulated gesture distance since becoming responder is
         // gestureState.d{x,y}
-        GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState)
+      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
+       console.log(callback)
+       ws.send('blah')
+           //var ss = new ServerConnection()
+           //send to server
+         })
+
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {

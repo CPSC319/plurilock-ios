@@ -11,7 +11,7 @@ import React, {
   Text,
   View,
 } from 'react-native';
-import ExNavigator from '@exponent/react-native-navigator';
+//import ExNavigator from '@exponent/react-native-navigator';
 import TabBar from "./TabBar"
 import Button from 'react-native-button'
 var YourRouter = require('./route.js');
@@ -27,19 +27,19 @@ class LoginPage extends Component {
         source={{uri: logo}}
       />
       <View><Text style={styles.brand}>MONEYS</Text></View>
-      
+
                 <Animatable.View>
           <View style={loginstyles.formbox}>
             <View style={loginstyles.textinputview} >
-              
+
               <TextInput style={loginstyles.textinput} placeholder="Username" placeholderTextColor='gray'/>
             </View>
             <View style={loginstyles.textinputview} >
-              
+
               <TextInput style={loginstyles.textinput} placeholder="Password" placeholderTextColor='gray'/>
             </View>
             <TouchableOpacity style={loginstyles.button}>
-        <Button 
+        <Button
       style={loginstyles.buttontext}
         onPress={() => {
           let route = YourRouter.getMainRoute();
@@ -53,7 +53,7 @@ class LoginPage extends Component {
         </View>
 
     );
-   
+
   }
 }
 

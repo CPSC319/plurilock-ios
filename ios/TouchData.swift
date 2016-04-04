@@ -109,6 +109,40 @@ class TouchData: NSObject {
     print("X, Y position:", self.x_coord!, ",", self.y_coord!)
     print("X, Y precision:", self.x_precision!, ",", self.y_precision!)
     print("X, Y velocity:", self.velocity_x!, ",", self.velocity_y!)
+    
+    //let sc = ServerController()
+    //let json = packageForServer()
+    //sc.writeToServer(json)
+  }
+  
+  func packageForServer() -> String {
+    
+    
+    
+    let dataDictionary = Dictionary<String, String>(dictionaryLiteral: ("evtType", self.eventCode.rawValue), ("timestamp", self.timestamp!))
+//      ["evtType": self.eventCode,
+//        "timestamp": self.timestamp,
+//        "deviceOrientation": self.deviceOrientation,
+//        "strokeOrientation": self.strokeOrientation,
+//        "x-position": self.x_coord,
+//        "y-position": self.y_coord,
+//        "x-precision": self.x_precision,
+//        "y-precision": self.y_precision,
+//        "x-velocity": self.velocity_x,
+//        "y-velocity": self.velocity_y]
+    do {
+    let data = try NSJSONSerialization.dataWithJSONObject(dataDictionary, options: NSJSONWritingOptions.PrettyPrinted)
+
+      let jsonString = NSString(data: data,
+        encoding: NSASCIIStringEncoding)
+    //print("CONVERTING TOUCH DATA TO JSON: ", theJSONText!)
+      return String(jsonString)
+    
+    } catch let error as NSError {
+      print(error)
+    }
+    
+    return ""
   }
   
 }

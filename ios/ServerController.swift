@@ -17,17 +17,27 @@ class ServerController: NSObject, WebSocketDelegate {
   override init() {
     super.init()
     //let socket = WebSocket(url: NSURL(string: "ws://btdemo.plurilock.com:8095")!)
-    print("CREATING SOCKET")
+    print("CREATING SERVER CONTROLLER")
     socket.delegate = self
   }
-  
+   
   @objc func connectToServer(str: String) {
     print("CONNECTING TO SERVER ", str)
     socket.connect()
   }
   
+  @objc func writeToServer(str: String) {
+    //socket.connect()
+    if (socket.isConnected) {
+        print("WRITING TO SERVER ", str)
+        socket.writeString(str)
+    }
+
+  }
+  
   func websocketDidConnect(socket: WebSocket) {
     print("websocket is connected")
+    writeToServer("TEST WRITE TO SERVER")
   }
   
   func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -36,6 +46,12 @@ class ServerController: NSObject, WebSocketDelegate {
   
   func websocketDidReceiveMessage(socket: WebSocket, text: String) {
     print("got some text: \(text)")
+    if (socket.isConnected) {
+     print("SOCKET STILL CONNECTED")
+      socket.writeString("writing string")
+    } else {
+      print("SOCKET NOT CONNECTED")
+    }
   }
   
   func websocketDidReceiveData(socket: WebSocket, data: NSData) {

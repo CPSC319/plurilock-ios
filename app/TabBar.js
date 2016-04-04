@@ -18,7 +18,7 @@ import SettingsPage from "./SettingsPage";
 import PanGesturePage from "./PanGesturePage";
 import MapviewPage from "./MapviewPage";
 
-import {ServerController} from 'NativeModules'
+//import {ServerController} from 'NativeModules'
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +35,8 @@ export default class TabBar extends Component {
   constructor(props) {
     super(props);
     this.logDeviceInfo();
-    ServerController.connectToServer("hi")
+    //ServerController.connectToServer("hi")
+    //ServerController.writeToServer("writing data to server")
     this.state = {
       selectedTab: "OverviewTab"
     };

@@ -41,4 +41,15 @@ class KeyData: NSObject {
     print("Key Data:", self.keyData!)
 
   }
+  
+  func packageForServer() {
+    /*
+      {
+        evtType: mono
+        key: self.keyData
+        timestamp: self.timestamp
+        deviceOrientation: self.deviceOrientation
+      }
+    */
+  }
 }

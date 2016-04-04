@@ -8,7 +8,7 @@ import React, {
   Text,
   View,
 } from 'react-native';
-import ExNavigator from '@exponent/react-native-navigator';
+//import ExNavigator from '@exponent/react-native-navigator';
 import TabBar from "./TabBar"
 
 class MainPage extends Component {

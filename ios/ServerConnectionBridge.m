@@ -11,5 +11,6 @@
 @interface RCT_EXTERN_MODULE(ServerController, NSObject)
 
 RCT_EXTERN_METHOD(connectToServer:(NSString *)str)
+RCT_EXTERN_METHOD(writeToServer:(NSString *)str)
 
 @end
