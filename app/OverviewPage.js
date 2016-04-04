@@ -206,6 +206,14 @@ budget: {
 
 
 
+var sampleData = {
+  "btClientType": "iOS",
+  "btClientVersion":"1.0",
+  "userID":"Youn",
+  "domain":"team2",
+  "data":[{"evtType":"di","fromKey":65,"toKey":70,"span":23},{"evtType":"mono","key":83,"span":33},{"evtType":"mono","key":70,"span":34},{"evtType":"di","fromKey":70,"toKey":13,"span":12},{"evtType":"mono","key":13,"span":78},{"evtType":"di","fromKey":13,"toKey":65,"span":80},{"evtType":"mono","key":83,"span":10},{"evtType":"mono","key":65,"span":45},{"evtType":"di","fromKey":68,"toKey":65,"span":-45},{"evtType":"mono","key":83,"span":32}]
+} 
+
 export default class OverviewPage extends Component {
 
   componentWillMount() {
@@ -213,10 +221,10 @@ export default class OverviewPage extends Component {
     ws.onopen = () => {
       // connection opened
     console.log("CONNECTING TO SERVER")
-    ws.send('something');
-    ws.send('something');
-    ws.send('something');
-    ws.send('something');
+    ws.send(JSON.stringify(sampleData));
+    ws.send(JSON.stringify(sampleData));
+    ws.send(JSON.stringify(sampleData));
+    ws.send(JSON.stringify(sampleData));
   };
 
      ws.onmessage = (e) => {
