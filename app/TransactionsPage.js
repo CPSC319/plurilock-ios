@@ -206,7 +206,34 @@ budget: {
 
 });
 
+var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
 
+ws.onopen = () => {
+  // connection opened
+console.log("CONNECTING TO SERVER")
+};
+
+ ws.onmessage = (e) => {
+   // a message was received
+   console.log(e.data);
+   if (e.data.indexOf("lock") > 0) {
+     console.log("OMG LOCK DEVICE!")
+     AlertIOS.alert(
+        'Intruder Detected',
+        'OMG LOCK DEVICE!!'
+      );
+   }
+};
+
+ ws.onerror = (e) => {
+   // an error occurred
+   console.log(e.message);
+};
+
+ ws.onclose = (e) => {
+   // connection closed
+   console.log(e.code, e.reason);
+};
 
 export default class TransactionsPage extends Component {
 
@@ -219,30 +246,28 @@ export default class TransactionsPage extends Component {
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
 
       onPanResponderGrant: (evt, gestureState) => {
-        // The guesture has started. Show visual feedback so the user knows
-        // what is happening!
-
-        // gestureState.{x,y}0 will be set to zero now
       },
       onPanResponderMove: (evt, gestureState) => {
-        // The most recent move distance is gestureState.move{X,Y}
+      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
+       console.log("sending to server: ",callback)
 
-        // The accumulated gesture distance since becoming responder is
-        // gestureState.d{x,y}
-        GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState)
+       var data = {
+         "btClientType": "iOS",
+         "btClientVersion":"1.0",
+         "userID":"Bruce",
+         "domain":"team2",
+         "data":callback
+       }
+
+       ws.send(JSON.stringify(data));
+         })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        // The user has released all touches while this view is the
-        // responder. This typically means a gesture has succeeded
       },
       onPanResponderTerminate: (evt, gestureState) => {
-        // Another component has become the responder, so this gesture
-        // should be cancelled
       },
       onShouldBlockNativeResponder: (evt, gestureState) => {
-        // Returns whether this component should block native components from becoming the JS
-        // responder. Returns true by default. Is currently only supported on android.
         return true;
       },
     });
@@ -465,7 +490,19 @@ export default class TransactionsPage extends Component {
     }
 
     onKeyPress(e) {
-      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key)
+      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key, (callback) => {
+        console.log("sending to server: ",callback)
+
+        var data = {
+          "btClientType": "iOS",
+          "btClientVersion":"1.0",
+          "userID":"Bruce",
+          "domain":"team2",
+          "data":callback
+        }
+
+        ws.send(JSON.stringify(data));
+      })
     }
 
 }
