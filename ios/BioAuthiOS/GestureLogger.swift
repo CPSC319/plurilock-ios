@@ -7,22 +7,39 @@
 //
 
 import UIKit
+import Starscream
 
 @objc(GestureLogger)
-class GestureLogger: NSObject {
+class GestureLogger: NSObject{
+  
+  
+  var dataArray = [AnyObject]()
   
   @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary, callback: RCTResponseSenderBlock) -> Void {
     let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData)
-   
-    td.printData()
     let json = td.packageForServer()
-    callback([json])
+    
+    if (dataArray.count == 10) {
+      print("ABOUT TO CALLBACK")
+      callback([dataArray])
+      dataArray = [AnyObject]()
+    } else {
+      dataArray.append(json)
+    }
+    
     return
   }
   
-  @objc func retrieveKeyData(appName: String, timestamp: String, keyData: String) {
+  @objc func retrieveKeyData(appName: String, timestamp: String, keyData: String, callback: RCTResponseSenderBlock) {
     let kd = KeyData(appName: appName, timestamp: timestamp, keyData: keyData)
-    kd.printData()
+    let json = kd.packageForServer()
+    if (dataArray.count == 10) {
+      print("ABOUT TO CALLBACK")
+      callback([dataArray])
+      dataArray = [AnyObject]()
+    } else {
+      dataArray.append(json)
+    }
   }
   
   func platform() -> String {
@@ -30,4 +47,5 @@ class GestureLogger: NSObject {
     uname(&sysinfo) // ignore return value
     return NSString(bytes: &sysinfo.machine, length: Int(_SYS_NAMELEN), encoding: NSASCIIStringEncoding)! as String
   }
+  
 }

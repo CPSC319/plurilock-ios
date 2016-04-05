@@ -42,9 +42,9 @@ class KeyData: NSObject {
 
   }
   
-  func packageForServer() {
+  func packageForServer() -> NSString{
     /*
-    
+  
       {
         evtType: mono
         key: self.keyData
@@ -52,5 +52,26 @@ class KeyData: NSObject {
         deviceOrientation: self.deviceOrientation
       }
     */
+    
+    
+    let dataDictionary = Dictionary<String, AnyObject>(dictionaryLiteral:
+      ("evtType", "mono"),
+      ("key", self.keyData!),
+      ("timestamp", self.timestamp!),
+      ("deviceOrientation", self.deviceOrientation.rawValue))
+    do {
+      let data = try NSJSONSerialization.dataWithJSONObject(dataDictionary, options: NSJSONWritingOptions.init(rawValue: 8))
+      
+      let jsonString = NSString(data: data,
+        encoding: NSASCIIStringEncoding)
+      
+      return jsonString! as String
+      
+    } catch let error as NSError {
+      print(error)
+    }
+    
+    return ""
+    
   }
 }

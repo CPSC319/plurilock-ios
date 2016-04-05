@@ -205,42 +205,40 @@ budget: {
 });
 
 
+var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
 
-var sampleData = {
-  "btClientType": "iOS",
-  "btClientVersion":"1.0",
-  "userID":"Youn",
-  "domain":"team2",
-  "data":[{"evtType":"di","fromKey":65,"toKey":70,"span":23},{"evtType":"mono","key":83,"span":33},{"evtType":"mono","key":70,"span":34},{"evtType":"di","fromKey":70,"toKey":13,"span":12},{"evtType":"mono","key":13,"span":78},{"evtType":"di","fromKey":13,"toKey":65,"span":80},{"evtType":"mono","key":83,"span":10},{"evtType":"mono","key":65,"span":45},{"evtType":"di","fromKey":68,"toKey":65,"span":-45},{"evtType":"mono","key":83,"span":32}]
-} 
+ws.onopen = () => {
+  // connection opened
+console.log("CONNECTING TO SERVER")
+};
+
+ ws.onmessage = (e) => {
+   // a message was received
+   console.log(e.data);
+   if (e.data.indexOf("lock") > 0) {
+     console.log("OMG LOCK DEVICE!")
+     AlertIOS.alert(
+        'Intruder Detected',
+        'OMG LOCK DEVICE!!'
+      );
+   }
+};
+
+ ws.onerror = (e) => {
+   // an error occurred
+   console.log(e.message);
+};
+
+ ws.onclose = (e) => {
+   // connection closed
+   console.log(e.code, e.reason);
+};
 
 export default class OverviewPage extends Component {
 
+
+
   componentWillMount() {
-    var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
-    ws.onopen = () => {
-      // connection opened
-    console.log("CONNECTING TO SERVER")
-    ws.send(JSON.stringify(sampleData));
-    ws.send(JSON.stringify(sampleData));
-    ws.send(JSON.stringify(sampleData));
-    ws.send(JSON.stringify(sampleData));
-  };
-
-     ws.onmessage = (e) => {
-       // a message was received
-       console.log(e.data);
-  };
-
-     ws.onerror = (e) => {
-       // an error occurred
-       console.log(e.message);
-  };
-
-     ws.onclose = (e) => {
-       // connection closed
-       console.log(e.code, e.reason);
-  };
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -249,36 +247,28 @@ export default class OverviewPage extends Component {
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
 
       onPanResponderGrant: (evt, gestureState) => {
-        // The guesture has started. Show visual feedback so the user knows
-        // what is happening!
-
-        // gestureState.{x,y}0 will be set to zero now
       },
       onPanResponderMove: (evt, gestureState) => {
-        // The most recent move distance is gestureState.move{X,Y}
-
-        // The accumulated gesture distance since becoming responder is
-        // gestureState.d{x,y}
       GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
-       console.log(callback)
-       ws.send('blah')
-           //var ss = new ServerConnection()
-           //send to server
-         })
+       console.log("sending to server: ",callback)
 
+       var data = {
+         "btClientType": "iOS",
+         "btClientVersion":"1.0",
+         "userID":"Bruce",
+         "domain":"team2",
+         "data":callback
+       }
+
+       ws.send(JSON.stringify(data));
+         })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
-        // The user has released all touches while this view is the
-        // responder. This typically means a gesture has succeeded
       },
       onPanResponderTerminate: (evt, gestureState) => {
-        // Another component has become the responder, so this gesture
-        // should be cancelled
       },
       onShouldBlockNativeResponder: (evt, gestureState) => {
-        // Returns whether this component should block native components from becoming the JS
-        // responder. Returns true by default. Is currently only supported on android.
         return true;
       },
     });
@@ -589,7 +579,19 @@ var innerContainerTransparentStyle = this.state.transparent
     }
 
     onKeyPress(e) {
-      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key)
+      GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key, (callback) => {
+        console.log("sending to server: ",callback)
+
+        var data = {
+          "btClientType": "iOS",
+          "btClientVersion":"1.0",
+          "userID":"Bruce",
+          "domain":"team2",
+          "data":callback
+        }
+
+        ws.send(JSON.stringify(data));
+      })
     }
 
 }

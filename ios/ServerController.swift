@@ -14,6 +14,14 @@ class ServerController: NSObject, WebSocketDelegate {
   
   var socket = WebSocket(url: NSURL(string: "ws://btdemo.plurilock.com:8095")!)
   
+//  var sampleData = {
+//    "btClientType": "iOS",
+//    "btClientVersion":"1.0",
+//    "userID":"Youn",
+//    "domain":"team2",
+//    "data":[{"evtType":"di","fromKey":65,"toKey":70,"span":23}]
+//  }
+  
   override init() {
     super.init()
     //let socket = WebSocket(url: NSURL(string: "ws://btdemo.plurilock.com:8095")!)
