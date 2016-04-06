@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Starscream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -52,12 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     self.window!.rootViewController = rootViewController;
     self.window!.makeKeyAndVisible()
-    
-    
-    
-    //Connect to Plurilock servers
-    //let server = ServerController()
-    //server.connectToServer("connecting from app delegate")
     
     return true
   }

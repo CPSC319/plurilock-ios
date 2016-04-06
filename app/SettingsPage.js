@@ -12,8 +12,9 @@ import React, {
   AlertIOS
 } from "react-native";
 
-import {GestureLogger} from 'NativeModules'
-import Button from 'react-native-button'
+import {GestureLogger} from 'NativeModules';
+import ServerConnection from './ServerConnection';
+import Button from 'react-native-button';
 var YourRouter = require('./route.js');
 
 const styles = StyleSheet.create({
@@ -103,14 +104,15 @@ export default class SettingsPage extends Component {
 
 
 
-  constructor() {
-    super();
-    var testData = [{settingName:"Range", type:"Slider"}, {settingName:"Help", type:"Text"}, {settingName:"Acknowledgements", type:"Text"}, {settingName:"", type:"Button"}]
+  constructor(props) {
+    super(props);
+    var testData = [{settingName:"Range", type:"Slider"}, {settingName:"", type:"Button"}]
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(testData),
       value: 0,
     };
+    this.renderRow = this.renderRow.bind(this)
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -135,6 +137,7 @@ export default class SettingsPage extends Component {
           onPress={() => {
             //let route = YourRouter.getHomeRoute();
             //this.props.navigator.push(route);
+            this.props.parentProps.navigator.replace({id: 'login'});
           }}>
             Logout
           </Button>
