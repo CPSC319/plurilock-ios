@@ -14,7 +14,7 @@ import React, {
   Component,
   Dimensions,
   PanResponder,
-  AlertIOS,
+  AlertIOS
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window')
@@ -26,36 +26,9 @@ var region_init = {
   longitudeDelta: 0.01,
 }
 import {GestureLogger} from 'NativeModules'
+import ServerConnection from './ServerConnection'
 let mySelf
 
-var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
-
-ws.onopen = () => {
-  // connection opened
-console.log("CONNECTING TO SERVER")
-};
-
- ws.onmessage = (e) => {
-   // a message was received
-   console.log(e.data);
-   if (e.data.indexOf("lock") > 0) {
-     console.log("OMG LOCK DEVICE!")
-     AlertIOS.alert(
-        'Intruder Detected',
-        'OMG LOCK DEVICE!!'
-      );
-   }
-};
-
- ws.onerror = (e) => {
-   // an error occurred
-   console.log(e.message);
-};
-
- ws.onclose = (e) => {
-   // connection closed
-   console.log(e.code, e.reason);
-};
 export default class MapviewPage extends Component {
 
   componentWillMount() {
@@ -80,7 +53,7 @@ export default class MapviewPage extends Component {
          "data":callback
        }
 
-       ws.send(JSON.stringify(data));
+       ServerConnection.send(JSON.stringify(data));
          })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,

@@ -17,6 +17,7 @@ import TransactionsPage from "./TransactionsPage";
 import SettingsPage from "./SettingsPage";
 import PanGesturePage from "./PanGesturePage";
 import MapviewPage from "./MapviewPage";
+import ServerConnection from "./ServerConnection"
 
 //import {ServerController} from 'NativeModules'
 
@@ -32,25 +33,16 @@ const settingsIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAMA
 const mapIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAMAAABrrFhUAAAA7VBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///9uiPDJAAAATXRSTlMAAQIDBQgLDQ8TFRgdICIjJCUnKCktMDI4PD9ARFVmd4CIkZmip6iqrK2ur7CxsrS1trm7vr/AxMfP1tzi5+vs7u/w8fLz9Pf5+vz9/j+SnHQAAAABYktHRE4ZYXHfAAAD70lEQVR42u3ZyVoTQRiF4TiiKDYOoCIzKIiKIohzJCQginX/t+NEk0DSSVf9Q7c+39mlF1Wn3s1ZpNEghBBCCCGEEEIIkWTqSauzkXV/Tz7rHLycqWc3g0ysHodfaZ7eMtn8/Tvs1oCgr5t+xpePwt+s5582Tj5UTjCgm3bGFjv5a0M7/3hw+qlSgoHddHN5/nPoSf6591t4O1vN8wu6aebi3MczTx0MUA1BYTfFzL4/99AigAoIirup5cGbvmcWAzgTDOumlHtrP0IUgCPB8G4qubnyfeAbhwI4EYzqppDrS18LXjgCwIFgdDdxri7sF75vJIAxQZluuuMaD2BIUK6b7rimABgRlO2mO65pABYEpbvpjmsqgDZBRDfdcU0H0CSI6qY7rhIALYLIbrrjKgPQIIjupjuuUgApQUI33XGVA0gIkrrpjqsGQCpBYjfdcdUBSCJI7aY7rloA0QTp3XTHVQ8gikDSTXdcNQFKE8i66Y6rLkApAmk33XHVBhhJIO+mO676AEMJNLrpjqsFQCGBTjfdcbUBGEyg1E13XK0A+gnUuhVnclPcWhEghJ3bJt0Kc/8w1AsgtO5adCvM61A3gPDColthOvUDaFl0K0yoH0Cw6AYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wnAfn5Wq34A+x4AW/lZz+sHsOUA0JnOz7qzVzeAbjc7gM2se1i2Uy+A3m5GAO8enT3u4XZ9AM53MwD4MHeh70AFArNuygCf5i8NPFJMYNhNEeDLwpXCQ4UEpt2UAA6Xrg09VkRg3E0B4NvKjZEHCwjMuwkBjteyUkcnEzh0kwBsT5c+PJHApVvqJeXGVUbg1C3lkrLjKiNw6xZ7SflxlRE4dou5JGZcZQSu3WzGVUbg2s1mXGUErt1sxlVG4NrNZlxlBK7dbMZVRuDazWZcZQSu3WzGVUbg2s1mXGUErt2shl9C4NrNbvjTCVy7WQ5/KoFrN9vhTyNw7WY9/CkErt3shz+ewLWbx/DHErh28xn+OALXbp3uP6mLY43KMrPbfWvbtdvGyRVHy+ONStMlWHftljX/jOvqRKPynBA0M99u2dP23uOpRi0y8+qgvX6rnt0IIYQQQgghhBDyz+Yn4EEWPx6mJe8AAAAASUVORK5CYII=";
 
 export default class TabBar extends Component {
+
   constructor(props) {
     super(props);
-    this.logDeviceInfo();
-    //ServerController.connectToServer("hi")
-    //ServerController.writeToServer("writing data to server")
+
     this.state = {
       selectedTab: "OverviewTab"
     };
   }
 
-  logDeviceInfo() {
-    console.log("Device Unique ID: " + DeviceInfo.getUniqueID());
-    console.log("Device Manufacturer: " + DeviceInfo.getManufacturer());
-    console.log("Device Model: " + DeviceInfo.getModel());
-    console.log("Device Version: " + DeviceInfo.getSystemVersion());
-    console.log("App Version: " + DeviceInfo.getVersion());
-    console.log("Device Name: " + DeviceInfo.getDeviceName());
-    console.log("Device Locale: " + DeviceInfo.getDeviceLocale());
-  }
+
 
   renderOverviewTab() {
     return (

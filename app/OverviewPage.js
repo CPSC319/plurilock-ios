@@ -20,7 +20,8 @@ import React, {
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
-//import ServerConnection from './ServerConnection'
+import DeviceInfo from "react-native-device-info";
+import ServerConnection from './ServerConnection'
 
 var ProgressBar = require('react-native-progress-bar');
 
@@ -205,38 +206,7 @@ budget: {
 });
 
 
-var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
-
-ws.onopen = () => {
-  // connection opened
-console.log("CONNECTING TO SERVER")
-};
-
- ws.onmessage = (e) => {
-   // a message was received
-   console.log(e.data);
-   if (e.data.indexOf("lock") > 0) {
-     console.log("OMG LOCK DEVICE!")
-     AlertIOS.alert(
-        'Intruder Detected',
-        'OMG LOCK DEVICE!!'
-      );
-   }
-};
-
- ws.onerror = (e) => {
-   // an error occurred
-   console.log(e.message);
-};
-
- ws.onclose = (e) => {
-   // connection closed
-   console.log(e.code, e.reason);
-};
-
 export default class OverviewPage extends Component {
-
-
 
   componentWillMount() {
     this._panResponder = PanResponder.create({
@@ -249,6 +219,7 @@ export default class OverviewPage extends Component {
       onPanResponderGrant: (evt, gestureState) => {
       },
       onPanResponderMove: (evt, gestureState) => {
+
       GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
        console.log("sending to server: ",callback)
 
@@ -260,7 +231,7 @@ export default class OverviewPage extends Component {
          "data":callback
        }
 
-       ws.send(JSON.stringify(data));
+       ServerConnection.send(JSON.stringify(data));
          })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
@@ -297,6 +268,8 @@ export default class OverviewPage extends Component {
       this.onKeyPress = this.onKeyPress.bind(this)
       this.onAccountNameChange = this.onAccountNameChange.bind(this)
       this.onAccountAmountChange = this.onAccountAmountChange.bind(this)
+
+
       }
 
     _setModalVisible(visible) {
@@ -590,7 +563,7 @@ var innerContainerTransparentStyle = this.state.transparent
           "data":callback
         }
 
-        ws.send(JSON.stringify(data));
+        ServerConnection.send(JSON.stringify(data));
       })
     }
 

@@ -7,8 +7,12 @@ import React, {
   Component,
   StyleSheet,
   TouchableOpacity,
-  Text
+  Text,
+  PanResponder,
+  AlertIOS
 } from "react-native";
+
+import {GestureLogger} from 'NativeModules'
 import Button from 'react-native-button'
 var YourRouter = require('./route.js');
 
@@ -54,6 +58,46 @@ const styles = StyleSheet.create({
 });
 
 export default class SettingsPage extends Component {
+
+  componentWillMount() {
+    this._panResponder = PanResponder.create({
+      // Ask to be the responder:
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+
+      onPanResponderGrant: (evt, gestureState) => {
+      },
+      onPanResponderMove: (evt, gestureState) => {
+
+      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
+       console.log("sending to server: ",callback)
+
+       var data = {
+         "btClientType": "iOS",
+         "btClientVersion":"1.0",
+         "userID":"Bruce",
+         "domain":"team2",
+         "data":callback
+       }
+
+       ServerConnection.send(JSON.stringify(data));
+         })
+      },
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onPanResponderRelease: (evt, gestureState) => {
+      },
+      onPanResponderTerminate: (evt, gestureState) => {
+      },
+      onShouldBlockNativeResponder: (evt, gestureState) => {
+        return true;
+      },
+    });
+  }
+
+
+
   constructor() {
     super();
     var testData = [{settingName:"Range", type:"Slider"}, {settingName:"Help", type:"Text"}, {settingName:"Acknowledgements", type:"Text"}, {settingName:"", type:"Button"}]
@@ -109,6 +153,7 @@ export default class SettingsPage extends Component {
         <ListView
           dataSource={this.state.dataSource}
           renderRow={this.renderRow.bind(this)}
+          {...this._panResponder.panHandlers}
         />
       </View>
     );

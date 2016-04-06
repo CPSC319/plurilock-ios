@@ -20,6 +20,7 @@ import React, {
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
+import ServerConnection from './ServerConnection'
 
 var ProgressBar = require('react-native-progress-bar');
 
@@ -206,35 +207,6 @@ budget: {
 
 });
 
-var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
-
-ws.onopen = () => {
-  // connection opened
-console.log("CONNECTING TO SERVER")
-};
-
- ws.onmessage = (e) => {
-   // a message was received
-   console.log(e.data);
-   if (e.data.indexOf("lock") > 0) {
-     console.log("OMG LOCK DEVICE!")
-     AlertIOS.alert(
-        'Intruder Detected',
-        'OMG LOCK DEVICE!!'
-      );
-   }
-};
-
- ws.onerror = (e) => {
-   // an error occurred
-   console.log(e.message);
-};
-
- ws.onclose = (e) => {
-   // connection closed
-   console.log(e.code, e.reason);
-};
-
 export default class TransactionsPage extends Component {
 
   componentWillMount() {
@@ -259,7 +231,7 @@ export default class TransactionsPage extends Component {
          "data":callback
        }
 
-       ws.send(JSON.stringify(data));
+       ServerConnection.send(JSON.stringify(data));
          })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,

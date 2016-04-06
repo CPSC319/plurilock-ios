@@ -47,5 +47,6 @@ class GestureLogger: NSObject{
     uname(&sysinfo) // ignore return value
     return NSString(bytes: &sysinfo.machine, length: Int(_SYS_NAMELEN), encoding: NSASCIIStringEncoding)! as String
   }
+
   
 }
