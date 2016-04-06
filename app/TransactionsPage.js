@@ -473,7 +473,7 @@ export default class TransactionsPage extends Component {
           "data":callback
         }
 
-        ws.send(JSON.stringify(data));
+        ServerConnection.send(JSON.stringify(data));
       })
     }
 

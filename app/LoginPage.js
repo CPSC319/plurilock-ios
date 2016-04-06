@@ -36,7 +36,7 @@ class LoginPage extends Component {
             </View>
             <View style={loginstyles.textinputview} >
 
-              <TextInput style={loginstyles.textinput} placeholder="Password" placeholderTextColor='gray'/>
+              <TextInput style={loginstyles.textinput} secureTextEntry={true} placeholder="Password" placeholderTextColor='gray'/>
             </View>
             <TouchableOpacity style={loginstyles.button}>
         <Button
@@ -125,7 +125,7 @@ var loginstyles = StyleSheet.create({
   textinput: {
     flex:10,
     height: 40,
-    color: 'white',
+    color: 'black',
     paddingLeft: 20,
     fontSize: 12
   },
