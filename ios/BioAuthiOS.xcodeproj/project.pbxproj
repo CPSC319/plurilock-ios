@@ -19,15 +19,11 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		2616A92A1C98F7CF00D955C2 /* ServerConnectionBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2616A9291C98F7CF00D955C2 /* ServerConnectionBridge.m */; };
 		261B01631C8273FF008E7F76 /* TouchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B01621C8273FF008E7F76 /* TouchData.swift */; };
 		262503EF1C85499100BB9374 /* KeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262503EE1C85499100BB9374 /* KeyData.swift */; };
 		2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0331C804D31003FEBB6 /* AppDelegate.swift */; };
 		2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */; };
 		2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0471C806937003FEBB6 /* GestureLogger.swift */; };
-		26A17B221C97D02F00C938F6 /* ServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A17B211C97D02F00C938F6 /* ServerController.swift */; };
-		26A17B441C97D32900C938F6 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A17B391C97D2F800C938F6 /* Starscream.framework */; };
-		26A17B461C97D39100C938F6 /* Starscream.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 26A17B391C97D2F800C938F6 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53229E641C8ECCDB00757087 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53229E631C8ECCAF00757087 /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		F807FD991C86287F00FF9A3C /* libReactNativeIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F807FD981C86285B00FF9A3C /* libReactNativeIcons.a */; };
@@ -190,20 +186,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		26A17B451C97D36F00C938F6 /* Copy Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				26A17B461C97D39100C938F6 /* Starscream.framework in Copy Frameworks */,
-			);
-			name = "Copy Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -221,14 +203,12 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BioAuthiOS/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BioAuthiOS/Info.plist; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		2616A9291C98F7CF00D955C2 /* ServerConnectionBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnectionBridge.m; sourceTree = "<group>"; };
 		261B01621C8273FF008E7F76 /* TouchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchData.swift; sourceTree = "<group>"; };
 		262503EE1C85499100BB9374 /* KeyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyData.swift; sourceTree = "<group>"; };
 		2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioAuthiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		2638D0331C804D31003FEBB6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = BioAuthiOS/AppDelegate.swift; sourceTree = "<group>"; };
 		2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GestureLoggerBridge.m; path = BioAuthiOS/GestureLoggerBridge.m; sourceTree = "<group>"; };
 		2638D0471C806937003FEBB6 /* GestureLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GestureLogger.swift; path = BioAuthiOS/GestureLogger.swift; sourceTree = "<group>"; };
-		26A17B211C97D02F00C938F6 /* ServerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerController.swift; sourceTree = "<group>"; };
 		26A17B2F1C97D2F800C938F6 /* Starscream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Starscream.xcodeproj; path = "../../../../Downloads/Starscream-master/Starscream.xcodeproj"; sourceTree = "<group>"; };
 		53229E531C8ECCAE00757087 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -269,7 +249,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26A17B441C97D32900C938F6 /* Starscream.framework in Frameworks */,
 				53229E641C8ECCDB00757087 /* libRNDeviceInfo.a in Frameworks */,
 				F807FD991C86287F00FF9A3C /* libReactNativeIcons.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -368,14 +347,12 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				2638D0331C804D31003FEBB6 /* AppDelegate.swift */,
-				26A17B211C97D02F00C938F6 /* ServerController.swift */,
 				2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				2638D0471C806937003FEBB6 /* GestureLogger.swift */,
 				262503EE1C85499100BB9374 /* KeyData.swift */,
 				261B01621C8273FF008E7F76 /* TouchData.swift */,
 				2638D0451C806909003FEBB6 /* GestureLoggerBridge.m */,
-				2616A9291C98F7CF00D955C2 /* ServerConnectionBridge.m */,
 			);
 			name = BioAuthiOS;
 			sourceTree = "<group>";
@@ -533,7 +510,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				26A17B451C97D36F00C938F6 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -557,6 +533,9 @@
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 898FBKH7V4;
 					};
 				};
 			};
@@ -834,8 +813,6 @@
 			files = (
 				2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */,
 				2638D0461C806909003FEBB6 /* GestureLoggerBridge.m in Sources */,
-				2616A92A1C98F7CF00D955C2 /* ServerConnectionBridge.m in Sources */,
-				26A17B221C97D02F00C938F6 /* ServerController.swift in Sources */,
 				262503EF1C85499100BB9374 /* KeyData.swift in Sources */,
 				2638D0481C806937003FEBB6 /* GestureLogger.swift in Sources */,
 				261B01631C8273FF008E7F76 /* TouchData.swift in Sources */,
@@ -909,6 +886,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -921,6 +900,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = BioAuthiOS;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BioAuthiOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -932,6 +912,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -943,6 +925,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = BioAuthiOS;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "BioAuthiOS-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

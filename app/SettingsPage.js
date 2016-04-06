@@ -12,8 +12,9 @@ import React, {
   AlertIOS
 } from "react-native";
 
-import {GestureLogger} from 'NativeModules'
-import Button from 'react-native-button'
+import {GestureLogger} from 'NativeModules';
+import ServerConnection from './ServerConnection';
+import Button from 'react-native-button';
 var YourRouter = require('./route.js');
 
 const styles = StyleSheet.create({

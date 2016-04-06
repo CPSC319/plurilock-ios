@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Starscream
 
 @objc(GestureLogger)
 class GestureLogger: NSObject{

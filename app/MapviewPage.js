@@ -86,7 +86,7 @@ export default class MapviewPage extends Component {
          "data":position["coords"]
         };
         console.log(JSON.stringify(mapdata));
-        ws.send(JSON.stringify(mapdata));
+        ServerConnection.send(JSON.stringify(mapdata));
 
       },
       (error) => alert(error.message),
