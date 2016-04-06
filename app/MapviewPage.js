@@ -14,6 +14,7 @@ import React, {
   Component,
   Dimensions,
   PanResponder,
+  AlertIOS,
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window')
@@ -101,6 +102,23 @@ export default class MapviewPage extends Component {
       mapRegionInput: undefined,
       annotations: [],
     };
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        var initialPosition = JSON.stringify(position);
+        var mapdata = {
+         "btClientType": "iOS",
+         "btClientVersion":"1.0",
+         "userID":"Map",
+         "domain":"team2",
+         "data":position["coords"]
+        };
+        console.log(JSON.stringify(mapdata));
+        ws.send(JSON.stringify(mapdata));
+
+      },
+      (error) => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
   }
 
 
