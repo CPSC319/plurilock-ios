@@ -226,11 +226,15 @@ export default class OverviewPage extends Component {
 
       GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
        console.log("sending to server: ",callback)
+       var username = "TestUser"
+       if (this.props.parentProps.username != '') {
+         username = this.props.parentProps.username
+       }
 
        var data = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":"Bruce",
+         "userID":username,
          "domain":"team2",
          "data":callback
        }

@@ -36,11 +36,11 @@ export default class TabBar extends Component {
 
   constructor(props) {
     super(props);
-
+    console.log("tab: ",this.props.username)
     this.state = {
       selectedTab: "OverviewTab"
     };
-    
+
     this.renderOverviewTab = this.renderOverviewTab.bind(this)
     this.renderTransactionsTab = this.renderTransactionsTab.bind(this)
     this.renderSettingsTab = this.renderSettingsTab.bind(this)

@@ -49,11 +49,15 @@ export default class MapviewPage extends Component {
 
       GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
        console.log("sending to server: ",callback)
+       var username = "TestUser"
+       if (this.props.parentProps.username != '') {
+         username = this.props.parentProps.username
+       }
 
        var data = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":"Bruce",
+         "userID":username,
          "domain":"team2",
          "data":callback
        }
@@ -83,10 +87,16 @@ export default class MapviewPage extends Component {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         var initialPosition = JSON.stringify(position);
+
+        var username = "TestUser"
+        if (this.props.parentProps.username != '') {
+          username = this.props.parentProps.username
+        }
+
         var mapdata = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":"Map",
+         "userID":username,
          "domain":"team2",
          "data":position["coords"]
         };

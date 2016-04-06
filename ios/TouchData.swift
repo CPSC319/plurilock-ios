@@ -94,7 +94,6 @@ class TouchData: NSObject {
       self.eventCode = EventCode.SwipeUp
     }
     
-    print (gestureData["numberActiveTouches"])
     if gestureData["numberActiveTouches"]?.doubleValue > 1 {
       self.eventCode = EventCode.MultiTouch
     }

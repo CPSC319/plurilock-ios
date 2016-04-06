@@ -115,9 +115,9 @@ class BioAuthiOS extends React.Component {
           // alert(route.prop)
           if(route.id === 'login') {
             return <LoginPage route={route} navigator={navigator} />
-          } else if(route.id === 'tabBar') {
-            return <TabBar route={route} navigator={navigator} />
-          } 
+          } else {
+            return <TabBar username={route.id} route={route} navigator={navigator} />
+          }
         }}
       />
       //<MainPage/>

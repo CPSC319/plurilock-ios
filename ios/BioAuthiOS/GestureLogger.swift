@@ -17,10 +17,8 @@ class GestureLogger: NSObject{
   @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary, force: Double, callback: RCTResponseSenderBlock) -> Void {
     let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData, force: force)
     let json = td.packageForServer()
-    print("force data: ",force)
     
     if (dataArray.count == 10) {
-      print("ABOUT TO CALLBACK")
       callback([dataArray])
       dataArray = [AnyObject]()
     } else {
@@ -34,7 +32,6 @@ class GestureLogger: NSObject{
     let kd = KeyData(appName: appName, timestamp: timestamp, keyData: keyData)
     let json = kd.packageForServer()
     if (dataArray.count == 10) {
-      print("ABOUT TO CALLBACK")
       callback([dataArray])
       dataArray = [AnyObject]()
     } else {
