@@ -71,7 +71,12 @@ export default class SettingsPage extends Component {
       },
       onPanResponderMove: (evt, gestureState) => {
 
-      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
+        var force = evt.nativeEvent.force
+        if (force == null) {
+          force = 0
+        }
+
+      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
        console.log("sending to server: ",callback)
 
        var data = {

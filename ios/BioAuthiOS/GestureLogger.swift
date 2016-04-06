@@ -15,9 +15,10 @@ class GestureLogger: NSObject{
   
   var dataArray = [AnyObject]()
   
-  @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary, callback: RCTResponseSenderBlock) -> Void {
-    let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData)
+  @objc func retrievePanGestureData(appName: String, timestamp: String, gestureData: NSDictionary, force: Double, callback: RCTResponseSenderBlock) -> Void {
+    let td = TouchData(appName: appName, timestamp: timestamp, gestureData: gestureData, force: force)
     let json = td.packageForServer()
+    print("force data: ",force)
     
     if (dataArray.count == 10) {
       print("ABOUT TO CALLBACK")

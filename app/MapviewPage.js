@@ -42,7 +42,12 @@ export default class MapviewPage extends Component {
       onPanResponderGrant: (evt, gestureState) => {
       },
       onPanResponderMove: (evt, gestureState) => {
-      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
+        var force = evt.nativeEvent.force
+        if (force == null) {
+          force = 0
+        }
+
+      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
        console.log("sending to server: ",callback)
 
        var data = {
@@ -62,7 +67,7 @@ export default class MapviewPage extends Component {
       onPanResponderTerminate: (evt, gestureState) => {
       },
       onShouldBlockNativeResponder: (evt, gestureState) => {
-        return true;
+        return false;
       },
     });
   }
@@ -86,7 +91,7 @@ export default class MapviewPage extends Component {
          "data":position["coords"]
         };
         console.log(JSON.stringify(mapdata));
-        ws.send(JSON.stringify(mapdata));
+        ServerConnection.send(JSON.stringify(mapdata));
 
       },
       (error) => alert(error.message),

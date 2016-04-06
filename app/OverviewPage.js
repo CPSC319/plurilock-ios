@@ -20,7 +20,6 @@ import React, {
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
-import DeviceInfo from "react-native-device-info";
 import ServerConnection from './ServerConnection'
 
 var ProgressBar = require('react-native-progress-bar');
@@ -220,7 +219,12 @@ export default class OverviewPage extends Component {
       },
       onPanResponderMove: (evt, gestureState) => {
 
-      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, (callback) => {
+        var force = evt.nativeEvent.force
+        if (force == null) {
+          force = 0
+        }
+
+      GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
        console.log("sending to server: ",callback)
 
        var data = {
