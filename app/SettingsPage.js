@@ -6,9 +6,11 @@ import React, {
   View,
   Component,
   StyleSheet,
+  TouchableOpacity,
   Text
 } from "react-native";
-
+import Button from 'react-native-button'
+var YourRouter = require('./route.js');
 
 const styles = StyleSheet.create({
   container: {
@@ -35,13 +37,26 @@ const styles = StyleSheet.create({
     height: 20,
     width: 325,
     margin: 6
+  },
+  button: {
+    marginTop: 20,
+    borderColor: 'white',
+    borderWidth: 1,
+    backgroundColor: 'green'
+  },
+
+  buttontext: {
+    color: 'white',
+    fontSize: 18,
+    padding: 10,
+    textAlign: 'center',
   }
 });
 
 export default class SettingsPage extends Component {
   constructor() {
     super();
-    var testData = [{settingName:"Range", type:"Slider"}, {settingName:"Help", type:"Text"}, {settingName:"Acknowledgements", type:"Text"}]
+    var testData = [{settingName:"Range", type:"Slider"}, {settingName:"Help", type:"Text"}, {settingName:"Acknowledgements", type:"Text"}, {settingName:"", type:"Button"}]
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(testData),
@@ -63,6 +78,20 @@ export default class SettingsPage extends Component {
           </View>
         </View>
       );
+    } else if (rowData.type == "Button") {
+      return (
+        <TouchableOpacity style={styles.button}>
+          <Button
+          style={styles.buttontext}
+          onPress={() => {
+            //let route = YourRouter.getHomeRoute();
+            //this.props.navigator.push(route);
+          }}>
+            Logout
+          </Button>
+        </TouchableOpacity>
+      );
+
     } else {
       return (
         <View style={styles.wrapper}>
