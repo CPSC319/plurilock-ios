@@ -472,8 +472,8 @@ var innerContainerTransparentStyle = this.state.transparent
               <ProgressBar
                 fillStyle={{height: 40, backgroundColor: "green"}}
                 backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
-                style={{marginTop: 0, width: 349, height: 40}}
-                progress={this.state.progress}
+                style={{marginTop: 0, width: 315, height: 40}}
+                progress={0.45}
               />
               </View>
       )

@@ -101,7 +101,7 @@ export default class SettingsPage extends Component {
 
   constructor(props) {
     super(props);
-    var testData = [{settingName:"Range", type:"Slider"}, {settingName:"Help", type:"Text"}, {settingName:"Acknowledgements", type:"Text"}, {settingName:"", type:"Button"}]
+    var testData = [{settingName:"Range", type:"Slider"}, {settingName:"", type:"Button"}]
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(testData),
