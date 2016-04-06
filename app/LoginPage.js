@@ -42,8 +42,9 @@ class LoginPage extends Component {
         <Button
       style={loginstyles.buttontext}
         onPress={() => {
-          let route = YourRouter.getMainRoute();
-          this.props.navigator.push(route);
+          // let route = YourRouter.getMainRoute();
+          // this.props.navigator.push(route);
+          this.props.navigator.replace({id: 'tabBar'});
         }}>
           Login
         </Button>
