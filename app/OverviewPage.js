@@ -298,50 +298,7 @@ export default class OverviewPage extends Component {
       this.onAccountNameChange = this.onAccountNameChange.bind(this)
       this.onAccountAmountChange = this.onAccountAmountChange.bind(this)
 
-      var username = "TestUser"
-       if (this.props.parentProps.username != '') {
-         username = this.props.parentProps.username
        }
-       console.log("username is "+username);
-      var deviceData = {
-        "btClientType": "iOS",
-        "btClientVersion":"1.0",
-        "userID":username,
-        "domain":"team2",
-        "data":[{"Device UID": DeviceInfo.getUniqueID(),
-        "Device Manufacturer": DeviceInfo.getManufacturer(),
-        "Device Model": DeviceInfo.getModel(),
-                "Device Version": DeviceInfo.getSystemVersion(),
-                "App Version": DeviceInfo.getVersion(),
-                "Device Name": DeviceInfo.getDeviceName(),
-                "Device Locale": DeviceInfo.getDeviceLocale()}]
-      }
-
-      console.log("Device Unique ID: " + DeviceInfo.getUniqueID());
-      console.log("Device Manufacturer: " + DeviceInfo.getManufacturer());
-      console.log("Device Model: " + DeviceInfo.getModel());
-      console.log("Device Version: " + DeviceInfo.getSystemVersion());
-      console.log("App Version: " + DeviceInfo.getVersion());
-      console.log("Device Name: " + DeviceInfo.getDeviceName());
-      console.log("Device Locale: " + DeviceInfo.getDeviceLocale());
-
-      NetInfo.isConnected.fetch().then(isConnected => {
-          if (!isConnected){
-            console.log("Caching data for into the queue");
-            q.enqueue(deviceData);
-          } else {
-            while (q.size() != 0){
-              var prevData = q.dequeue();
-              console.log("Dequeuing from queue. Sending data.")
-              ServerConnection.send(JSON.stringify(prevData));
-              console.log("Data transmission complete.")
-            }
-            ServerConnection.send(JSON.stringify(deviceData));
-            console.log("Sending data");
-            console.log("QUEUE SIZE IS "+ q.size());
-          }
-       });
-      }
     _setModalVisible(visible) {
   this.setState({modalVisible: visible});
   }
