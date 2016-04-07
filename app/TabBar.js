@@ -18,7 +18,6 @@ import SettingsPage from "./SettingsPage";
 import PanGesturePage from "./PanGesturePage";
 import MapviewPage from "./MapviewPage";
 import ServerConnection from "./ServerConnection"
-
 //import {ServerController} from 'NativeModules'
 
 const styles = StyleSheet.create({

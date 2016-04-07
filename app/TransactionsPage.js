@@ -15,6 +15,7 @@ import React, {
   ListView,
   PanResponder,
   TextInput,
+  NetInfo,
   Modal,
   ProgressViewIOS
 } from 'react-native';
@@ -25,7 +26,8 @@ import ServerConnection from './ServerConnection'
 import budgets from './Budgets'
 import accounts from './Accounts'
 import transactions from './Transactions'
-
+import Queue from './Queue'
+var q = new Queue.Queue();
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
@@ -227,7 +229,25 @@ export default class TransactionsPage extends Component {
          "data":callback
        }
 
-       ServerConnection.send(JSON.stringify(data));
+  
+       NetInfo.isConnected.fetch().then(isConnected => {
+          if (!isConnected){
+            console.log("Caching data for into the queue");
+            q.enqueue(data);
+          } else {
+            while (q.size() != 0){
+              var prevData = q.dequeue();
+              console.log("Dequeuing from queue. Sending data.")
+              ServerConnection.send(JSON.stringify(prevData));
+              console.log("Data transmission complete.")
+            }
+            ServerConnection.send(JSON.stringify(data));
+            console.log("Sending data");
+            console.log("QUEUE SIZE IS "+ q.size());
+          }
+       });
+       
+
          })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
@@ -545,7 +565,26 @@ export default class TransactionsPage extends Component {
           "data":callback
         }
 
-        ServerConnection.send(JSON.stringify(data));
+       // var dat = data; 
+       NetInfo.isConnected.fetch().then(isConnected => {
+          if (!isConnected){
+            console.log("Caching data for into the queue");
+            q.enqueue(data);
+          } else {
+            while (q.size() > 0){
+              console.log("QUEUE SIZE IS "+ q.size());
+              var prevData = q.dequeue();
+              console.log("Dequeuing from queue. Sending data.")
+              ServerConnection.send(JSON.stringify(prevData));
+              console.log("Data transmission complete.")
+            }
+            ServerConnection.send(JSON.stringify(data));
+            console.log("Sending data");
+            console.log("QUEUE SIZE IS "+ q.size());
+          }
+       });
+       
+
       })
     }
 
