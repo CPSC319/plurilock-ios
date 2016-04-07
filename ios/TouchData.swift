@@ -43,15 +43,18 @@ class TouchData: NSObject {
   //might not need these
   private var velocity_x: Double?
   private var velocity_y: Double?
+  
+  private var force: Double?
 
   private var deviceOrientation: DeviceOrientation
   private var strokeOrientation: StrokeOrientation
   private var eventCode: EventCode
   
-  init(appName: String, timestamp: String, gestureData: NSDictionary) {
+  init(appName: String, timestamp: String, gestureData: NSDictionary, force: Double) {
     
     self.appName = appName
     self.timestamp = timestamp
+    self.force = force
     
     if UIDevice.currentDevice().orientation.isPortrait {
       self.deviceOrientation = DeviceOrientation.Portrait
@@ -106,6 +109,7 @@ class TouchData: NSObject {
     print("X, Y position:", self.x_coord!, ",", self.y_coord!)
     print("X, Y precision:", self.x_precision!, ",", self.y_precision!)
     print("X, Y velocity:", self.velocity_x!, ",", self.velocity_y!)
+    print("Force: ", self.force!)
 
   }
   
@@ -121,7 +125,8 @@ class TouchData: NSObject {
       ("x-precision", self.x_precision!),
       ("y-precision", self.y_precision!),
       ("x-velocity", self.velocity_x!),
-      ("y-velocity", self.velocity_y!))
+      ("y-velocity", self.velocity_y!),
+      ("force", self.force!))
     do {
     let data = try NSJSONSerialization.dataWithJSONObject(dataDictionary, options: NSJSONWritingOptions.init(rawValue: 8))
 

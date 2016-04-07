@@ -36,10 +36,15 @@ export default class TabBar extends Component {
 
   constructor(props) {
     super(props);
-
+    console.log("tab: ",this.props.username)
     this.state = {
       selectedTab: "OverviewTab"
     };
+
+    this.renderOverviewTab = this.renderOverviewTab.bind(this)
+    this.renderTransactionsTab = this.renderTransactionsTab.bind(this)
+    this.renderSettingsTab = this.renderSettingsTab.bind(this)
+    this.renderMapviewTab = this.renderMapviewTab.bind(this)
   }
 
 
@@ -53,7 +58,8 @@ export default class TabBar extends Component {
         titleTextColor= "white"
         initialRoute={{
           title: "Overview",
-          component: OverviewPage
+          component: OverviewPage,
+          passProps: {parentProps: this.props}
         }}/>
     );
   }
@@ -67,7 +73,8 @@ export default class TabBar extends Component {
         titleTextColor= "white"
         initialRoute={{
           title: "Transactions",
-          component: TransactionsPage
+          component: TransactionsPage,
+          passProps: {parentProps: this.props}
         }}/>
     );
   }
@@ -81,7 +88,8 @@ export default class TabBar extends Component {
         titleTextColor= "white"
         initialRoute={{
           title: "Settings",
-          component: SettingsPage
+          component: SettingsPage,
+          passProps: {parentProps: this.props}
         }}/>
     );
   }
@@ -95,7 +103,8 @@ export default class TabBar extends Component {
         titleTextColor= "white"
         initialRoute={{
           title: "Map",
-          component: MapviewPage
+          component: MapviewPage,
+          passProps: {parentProps: this.props}
         }}/>
     );
   }
