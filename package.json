@@ -1,9 +1,9 @@
 {
   "name": "BioAuthiOS",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "react-native start"
+    "test": "node_modules/.bin/mocha ./test/"
   },
   "dependencies": {
     "@exponent/react-native-navigator": "^0.4.2",
@@ -13,12 +13,13 @@
     "react-native-icons": "^0.7.1",
     "react-native-popover": "^0.2.0",
     "react-native-router-flux": "^2.3.11",
-    "react-native-swipeout": "^2.0.12",
-    "react-native-button": "^1.4.2"
+    "react-native-swipeout": "^2.0.12"
   },
   "devDependencies": {
+    "mocha": "*",
     "react-dom": "^0.14.7",
     "react-native-animatable": "^0.5.2",
-    "react-native-progress-bar": "^0.1.2"
+    "react-native-progress-bar": "^0.1.2",
+    "ws": "^1.0.1"
   }
 }
