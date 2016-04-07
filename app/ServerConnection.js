@@ -1,34 +1,9 @@
-import DeviceInfo from "react-native-device-info";
 import {AlertIOS} from 'react-native'
 var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
-
+       
 ws.onopen = () => {
   // connection opened
 console.log("CONNECTING TO SERVER")
-
-var deviceData = {
-  "btClientType": "iOS",
-  "btClientVersion":"1.0",
-  "userID":"Bruce",
-  "domain":"team2",
-  "data":[{"Device UID": DeviceInfo.getUniqueID(),
-  "Device Manufacturer": DeviceInfo.getManufacturer(),
-  "Device Model": DeviceInfo.getModel(),
-          "Device Version": DeviceInfo.getSystemVersion(),
-          "App Version": DeviceInfo.getVersion(),
-          "Device Name": DeviceInfo.getDeviceName(),
-          "Device Locale": DeviceInfo.getDeviceLocale()}]
-}
-
-console.log("Device Unique ID: " + DeviceInfo.getUniqueID());
-console.log("Device Manufacturer: " + DeviceInfo.getManufacturer());
-console.log("Device Model: " + DeviceInfo.getModel());
-console.log("Device Version: " + DeviceInfo.getSystemVersion());
-console.log("App Version: " + DeviceInfo.getVersion());
-console.log("Device Name: " + DeviceInfo.getDeviceName());
-console.log("Device Locale: " + DeviceInfo.getDeviceLocale());
-
-  ws.send(JSON.stringify(deviceData));
 };
 
  ws.onmessage = (e) => {
