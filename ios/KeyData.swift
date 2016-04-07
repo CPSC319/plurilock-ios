@@ -44,16 +44,6 @@ class KeyData: NSObject {
 
   
   func packageForServer() -> NSString{
-    /*
-  
-      {
-        evtType: mono
-        key: self.keyData
-        timestamp: self.timestamp
-        deviceOrientation: self.deviceOrientation
-      }
-    */
-    
     
     let dataDictionary = Dictionary<String, AnyObject>(dictionaryLiteral:
       ("evtType", "mono"),

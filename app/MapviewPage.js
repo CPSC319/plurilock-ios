@@ -51,7 +51,10 @@ export default class MapviewPage extends Component {
         }
 
       GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
-       console.log("sending to server: ",callback)
+        console.log("=========TOUCH DATA =========\n")
+       console.log(callback)
+       console.log("  ")
+       console.log("========= END TOUCH DATA =========")
        var username = "TestUser"
        if (this.props.parentProps.username != '') {
          username = this.props.parentProps.username
@@ -117,7 +120,12 @@ export default class MapviewPage extends Component {
          "domain":"team2",
          "data":position["coords"]
         };
-        console.log(JSON.stringify(mapdata));
+
+        console.log("=========LOCATION DATA =========\n")
+       console.log(JSON.stringify(mapdata));
+       console.log("  ")
+       console.log("========= END LOCATION DATA =========")
+
        NetInfo.isConnected.fetch().then(isConnected => {
           if (!isConnected){
             console.log("Caching data for into the queue");

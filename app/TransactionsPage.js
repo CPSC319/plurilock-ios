@@ -215,7 +215,10 @@ export default class TransactionsPage extends Component {
         }
 
       GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
-       console.log("sending to server: ",callback)
+        console.log("=========TOUCH DATA =========\n")
+       console.log(callback)
+       console.log("  ")
+       console.log("========= END TOUCH DATA =========")
        var username = "TestUser"
        if (this.props.parentProps.username != '') {
          username = this.props.parentProps.username
@@ -555,7 +558,10 @@ export default class TransactionsPage extends Component {
 
     onKeyPress(e) {
       GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key, (callback) => {
-        console.log("sending to server: ",callback)
+        console.log("=========KEY DATA =========\n")
+       console.log(callback)
+       console.log("  ")
+       console.log("========= END KEY DATA =========")
         var username = "TestUser"
         if (this.props.parentProps.username != '') {
           username = this.props.parentProps.username

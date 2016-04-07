@@ -81,7 +81,10 @@ export default class SettingsPage extends Component {
         }
 
       GestureLogger.retrievePanGestureData("BioAuthiOS", new Date().toString(), gestureState, force, (callback) => {
-       console.log("sending to server: ",callback)
+        console.log("=========TOUCH DATA =========\n")
+       console.log(callback)
+       console.log("  ")
+       console.log("========= END TOUCH DATA =========")
        var username = "TestUser"
        if (this.props.parentProps.username != '') {
          username = this.props.parentProps.username

@@ -15,10 +15,8 @@ import DeviceInfo from "react-native-device-info";
 import OverviewPage from "./OverviewPage";
 import TransactionsPage from "./TransactionsPage";
 import SettingsPage from "./SettingsPage";
-import PanGesturePage from "./PanGesturePage";
 import MapviewPage from "./MapviewPage";
 import ServerConnection from "./ServerConnection"
-//import {ServerController} from 'NativeModules'
 
 const styles = StyleSheet.create({
   container: {
