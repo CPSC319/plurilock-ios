@@ -32,23 +32,23 @@ public enum EventCode: String {
 
 
 class TouchData: NSObject {
-  private var appName : String?
-  private var timestamp: String?
+  var appName : String?
+  var timestamp: String?
   
-  private var x_precision: Double?
-  private var y_precision: Double?
-  private var x_coord: Double?
-  private var y_coord: Double?
+  var x_precision: Double?
+  var y_precision: Double?
+  var x_coord: Double?
+  var y_coord: Double?
   
   //might not need these
-  private var velocity_x: Double?
-  private var velocity_y: Double?
+  var velocity_x: Double?
+  var velocity_y: Double?
   
-  private var force: Double?
+  var force: Double?
 
-  private var deviceOrientation: DeviceOrientation
-  private var strokeOrientation: StrokeOrientation
-  private var eventCode: EventCode
+  var deviceOrientation: DeviceOrientation
+  var strokeOrientation: StrokeOrientation
+  var eventCode: EventCode
   
   init(appName: String, timestamp: String, gestureData: NSDictionary, force: Double) {
     

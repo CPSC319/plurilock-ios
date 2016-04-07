@@ -19,6 +19,9 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		260426B51CB64BB60006BF0B /* TestKeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260426B41CB64BB60006BF0B /* TestKeyData.swift */; };
+		260426CC1CB657990006BF0B /* TestGestureLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260426CB1CB657990006BF0B /* TestGestureLogger.swift */; };
+		260426CE1CB657AF0006BF0B /* TestTouchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260426CD1CB657AF0006BF0B /* TestTouchData.swift */; };
 		261B01631C8273FF008E7F76 /* TouchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261B01621C8273FF008E7F76 /* TouchData.swift */; };
 		262503EF1C85499100BB9374 /* KeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262503EE1C85499100BB9374 /* KeyData.swift */; };
 		2638D0341C804D31003FEBB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2638D0331C804D31003FEBB6 /* AppDelegate.swift */; };
@@ -203,6 +206,10 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = BioAuthiOS/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BioAuthiOS/Info.plist; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		260426B31CB64BB60006BF0B /* BioAuthiOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioAuthiOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		260426B41CB64BB60006BF0B /* TestKeyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestKeyData.swift; sourceTree = "<group>"; };
+		260426CB1CB657990006BF0B /* TestGestureLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestGestureLogger.swift; sourceTree = "<group>"; };
+		260426CD1CB657AF0006BF0B /* TestTouchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTouchData.swift; sourceTree = "<group>"; };
 		261B01621C8273FF008E7F76 /* TouchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchData.swift; sourceTree = "<group>"; };
 		262503EE1C85499100BB9374 /* KeyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyData.swift; sourceTree = "<group>"; };
 		2638D0321C804D31003FEBB6 /* BioAuthiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioAuthiOS-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -312,6 +319,10 @@
 			children = (
 				00E356F21AD99517003FC87E /* BioAuthiOSTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
+				260426B41CB64BB60006BF0B /* TestKeyData.swift */,
+				260426B31CB64BB60006BF0B /* BioAuthiOSTests-Bridging-Header.h */,
+				260426CB1CB657990006BF0B /* TestGestureLogger.swift */,
+				260426CD1CB657AF0006BF0B /* TestTouchData.swift */,
 			);
 			path = BioAuthiOSTests;
 			sourceTree = "<group>";
@@ -804,6 +815,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* BioAuthiOSTests.m in Sources */,
+				260426B51CB64BB60006BF0B /* TestKeyData.swift in Sources */,
+				260426CC1CB657990006BF0B /* TestGestureLogger.swift in Sources */,
+				260426CE1CB657AF0006BF0B /* TestTouchData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,6 +860,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -859,6 +874,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BioAuthiOSTests/BioAuthiOSTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BioAuthiOS.app/BioAuthiOS";
 			};
 			name = Debug;
@@ -867,6 +884,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -877,6 +895,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BioAuthiOSTests/BioAuthiOSTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BioAuthiOS.app/BioAuthiOS";
 			};
 			name = Release;
@@ -895,7 +914,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BioAuthiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
@@ -920,7 +939,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = BioAuthiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
@@ -972,7 +991,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1013,7 +1032,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -9,14 +9,14 @@
 import Foundation
 
 class KeyData: NSObject {
-  private var appName : String?
-  private var timestamp: String?
+  var appName : String?
+  var timestamp: String?
   
   
-  private var deviceOrientation: DeviceOrientation
-  private var eventCode: EventCode
+  var deviceOrientation: DeviceOrientation
+  var eventCode: EventCode
   
-  private var keyData: String?
+  var keyData: String?
   
   init(appName: String, timestamp: String, keyData: String) {
     
@@ -41,6 +41,7 @@ class KeyData: NSObject {
     print("Key Data:", self.keyData!)
 
   }
+
   
   func packageForServer() -> NSString{
     /*
