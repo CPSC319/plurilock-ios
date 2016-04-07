@@ -16,7 +16,6 @@
     "react-native-swipeout": "^2.0.12"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
     "mocha": "*",
     "react-dom": "^0.14.7",
     "react-native-animatable": "^0.5.2",
