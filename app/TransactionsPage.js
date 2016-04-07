@@ -15,29 +15,16 @@ import React, {
   ListView,
   PanResponder,
   TextInput,
-  Modal
+  Modal,
+  ProgressViewIOS
 } from 'react-native';
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
 import ServerConnection from './ServerConnection'
-
-var ProgressBar = require('react-native-progress-bar');
-
-var budgets = [
-  ["Entertainment", 45, 100],
-  ["Restaurants", 90, 200],
-  ["Electronics", 225, 500]
-]
-
-var transactions = [
-  ["Starbucks Coffee", 4.76, "Restaurants"],
-  ["Apple iPhone 6S", 1029.99, "Electronics"],
-  ["Scotiabank Theatre", 12.99, "Entertainment"],
-  ["Reboot Cafe", 8.79, "Restaurants"],
-  ["Apple Silicon Case for iPhone 6S", 39.99, "Electronics"],
-  ["Miku Restaurant", 128.59, "Restaurant"]
-]
+import budgets from './Budgets'
+import accounts from './Accounts'
+import transactions from './Transactions'
 
 const styles = StyleSheet.create({
   container: {
@@ -263,24 +250,35 @@ export default class TransactionsPage extends Component {
 
       this.state = {
         dataSource: ds.cloneWithRowsAndSections(this.createRows()),
-        progress: 0.45,
+        progress: 0,
         modalVisible: false,
+        budgetModalVisible: false,
       };
       this.renderRow = this.renderRow.bind(this)
       this.createRows = this.createRows.bind(this)
       this.addtransaction = this.addtransaction.bind(this)
+      this.addBudget = this.addBudget.bind(this)
       this._setModalVisible = this._setModalVisible.bind(this)
+      this._setBudgetModalVisible = this._setBudgetModalVisible.bind(this)
       this.closeModal = this.closeModal.bind(this)
+      this.closeBudgetModal = this.closeBudgetModal.bind(this)
       this.onKeyPress = this.onKeyPress.bind(this)
       this.ontransactionNameChange = this.ontransactionNameChange.bind(this)
       this.ontransactionAmountChange = this.ontransactionAmountChange.bind(this)
+      this.onAccountNameChange = this.onAccountNameChange.bind(this)
       this.onCategoryNameChange = this.onCategoryNameChange.bind(this)
+      this.onBudgetNameChange = this.onBudgetNameChange.bind(this)
+      this.onBudgetAmountChange = this.onBudgetAmountChange.bind(this)
 
     }
 
     _setModalVisible(visible) {
   this.setState({modalVisible: visible});
   }
+
+    _setBudgetModalVisible(visible) {
+      this.setState({budgetModalVisible: visible})
+    }
 
     render() {
 
@@ -306,10 +304,31 @@ export default class TransactionsPage extends Component {
                         onKeyPress={this.onKeyPress} value={this.state.transactionName} placeholder={"Enter transaction name"}/>
                         <TextInput style={styles.newtransactionField} onChangeText={this.onCategoryNameChange}
                         onKeyPress={this.onKeyPress} value={this.state.categoryName} placeholder={"Enter category name"}/>
+                        <TextInput style={styles.newtransactionField} onChangeText={this.onAccountNameChange}
+                        onKeyPress={this.onKeyPress} value={this.state.accountName} placeholder={"Enter account name"}/>
                         <TextInput style={styles.newtransactionField} onChangeText={this.ontransactionAmountChange}
                         onKeyPress={this.onKeyPress} value={this.state.transactionAmount} keyboardType={'decimal-pad'} placeholder={"Enter transaction balance"}/>
                         <TouchableOpacity
                           onPress={this.closeModal}>
+                          <Text style={styles.modalButton}>{"Submit"}</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+          </Modal>
+
+          <Modal
+                    animated={true}
+                    transparent={true}
+                    visible={this.state.budgetModalVisible}>
+                    <View style={[styles.container, modalBackgroundStyle]}>
+                      <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
+                        <Text style={styles.newtransactionTitle}>{"Enter a new budget"}</Text>
+                        <TextInput style={styles.newtransactionField} onChangeText={this.onBudgetNameChange}
+                        onKeyPress={this.onKeyPress} value={this.state.budgetName} placeholder={"Enter budget name"}/>
+                        <TextInput style={styles.newtransactionField} onChangeText={this.onBudgetAmountChange}
+                        onKeyPress={this.onKeyPress} value={this.state.budgetAmount} keyboardType={'decimal-pad'} placeholder={"Enter budget amount"}/>
+                        <TouchableOpacity
+                          onPress={this.closeBudgetModal}>
                           <Text style={styles.modalButton}>{"Submit"}</Text>
                         </TouchableOpacity>
                       </View>
@@ -334,14 +353,33 @@ export default class TransactionsPage extends Component {
           this._setModalVisible(true)
         }
 
+        addBudget() {
+          this._setBudgetModalVisible(true)
+        }
+
         closeModal() {
-          if (this.state.transactionName != "" && this.state.transactionAmount != "" && this.state.categoryName != "") {
-            transactions.push([this.state.transactionName, this.state.transactionAmount, this.state.categoryName])
+          if (this.state.transactionName != "" && this.state.transactionAmount != "" && this.state.categoryName != "" && this.state.accountName != "") {
+            transactions.push([this.state.transactionName, parseInt(this.state.transactionAmount), this.state.categoryName])
+
+            for (let i = 0; i<accounts.length; i++) {
+              if (accounts[i][0] == this.state.accountName) {
+                accounts[i][1] -= parseInt(this.state.transactionAmount)
+              }
+            }
+
             this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(this.createRows())})
-            this.setState({transactionName: "", transactionAmount: "", categoryName: ""})
+            this.setState({transactionName: "", transactionAmount: "", categoryName: "", accountName: ""})
           }
-          this.setState({ progress: this.state.progress + 0.0000001})
           this._setModalVisible(false)
+        }
+
+        closeBudgetModal() {
+          if (this.state.budgetName != "" && this.state.budgetAmount != "") {
+            budgets.push([this.state.budgetName, parseInt(this.state.budgetAmount)])
+            this.setState({dataSource: this.state.dataSource.cloneWithRowsAndSections(this.createRows())})
+            this.setState({budgetName: "", budgetAmount: ""})
+          }
+          this._setBudgetModalVisible(false)
         }
 
     renderTransactionSection() {
@@ -366,9 +404,17 @@ export default class TransactionsPage extends Component {
     renderBudgetSection() {
       return (
         <View style={styles.sectionHeader}>
+        <View style={{flex: 2, flexDirection: "row"}}>
         <Text style={styles.sectionHeaderText}>
-          {'Budget '}
+          {'Budgets'}
         </Text>
+        <View style={styles.Tab}></View>
+        <TouchableHighlight onPress={this.addBudget} underlayColor={"white"}>
+        <Text style={styles.addButtonText}>
+          {'+'}
+        </Text>
+        </TouchableHighlight>
+        </View>
         <View style={styles.sectionHeaderSeparator}></View>
         </View>
       )
@@ -396,7 +442,7 @@ export default class TransactionsPage extends Component {
             <Text style={styles.transactionCategory}>{transactions[row][2]}</Text>
           </Text>
           <View style={styles.Tab}></View>
-          <Text style={styles.transactionValue}>${transactions[row][1]}</Text>
+          <Text style={styles.transactionValue}>${transactions[row][1].toFixed(2)}</Text>
         </View>
       )
     }
@@ -406,26 +452,31 @@ export default class TransactionsPage extends Component {
       if (row === -1) {
         return this.renderBudgetSection()
       }
-      //var progress = budgets[row][1]/budgets[row][2]
 
-      // setTimeout((function() {
-      //   this.setState({ progress: this.state.progress + 0.0000001});
-      // }).bind(this), 2000);
+      var total = 0.00;
+      for (let i = 0; i<transactions.length; i++) {
+        if (transactions[i][2] == budgets[row][0]) {
+          console.log("Transaction: ",transactions[i][1])
+          total += transactions[i][1]
+        }
+      }
 
-      //this.setState({progress: this.state.progress})
+      console.log("TOTAL IS: ",total)
+
+      var color = "green"
+      var progress = total/budgets[row][1]
+      if (progress > 1) {
+        color = "red"
+      }
       return (
               <View style={styles.budget}  >
               <View style={styles.halfbg}>
                   <Text style={styles.bodymsg}>{budgets[row][0]}</Text>
                   <View style={styles.Tab}></View>
-              <Text style={styles.money}>${budgets[row][1]} out of ${budgets[row][2]}</Text>
+              <Text style={styles.money}>${total.toFixed(2)} out of ${budgets[row][1]}</Text>
               </View>
-              <ProgressBar
-                fillStyle={{height: 40, backgroundColor: "green"}}
-                backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
-                style={{marginTop: 0, width: 315, height: 40}}
-                progress={this.state.progress}
-              />
+              <ProgressViewIOS style={{marginTop: 0, width: 315, height: 40}} progressTintColor={color} progress={progress}/>
+
               </View>
       )
     }
@@ -466,8 +517,20 @@ export default class TransactionsPage extends Component {
         this.setState({categoryName})
     }
 
+    onAccountNameChange(accountName) {
+        this.setState({accountName})
+    }
+
     ontransactionAmountChange(transactionAmount) {
         this.setState({transactionAmount})
+    }
+
+    onBudgetNameChange(budgetName) {
+        this.setState({budgetName})
+    }
+
+    onBudgetAmountChange(budgetAmount) {
+        this.setState({budgetAmount})
     }
 
     onKeyPress(e) {
@@ -487,225 +550,3 @@ export default class TransactionsPage extends Component {
     }
 
 }
-
-
-
-
-
-// /*
-// old transactions page
-// */
-
-//
-// 'use strict';
-// import React, {
-//   Component,
-//   StyleSheet,
-//   Text,
-//   View,
-//   ScrollView
-// } from 'react-native';
-// var { Icon, } = require('react-native-icons');
-// var ProgressBar = require('react-native-progress-bar');
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#e6e6e6'
-//   },
-//   text: {
-//     color: "black",
-//     alignSelf: "center",
-//     marginTop: 80,
-//
-//   },
-//   subconts: {
-//       marginTop: 10,
-//       marginLeft: 12,
-//       marginRight: 12,
-//       backgroundColor: 'white',
-//         padding: 20
-//   },
-//   header: {
-//     fontSize: 18,
-//     marginBottom: 10,
-//     fontWeight: 'bold',
-//   },
-//   headerl: {
-//     fontSize: 18,
-//     marginBottom: 10,
-//     fontWeight: 'bold',
-//     justifyContent: "space-between",
-//   },
-//   Tab:{
-// flexDirection: 'row',
-// flex: 1,
-// width:200,
-// justifyContent: 'space-between',
-// padding:5,
-// },
-//   headerr: {
-//     fontSize: 18,
-//     marginBottom: 10,
-//     fontWeight: 'bold',
-//     justifyContent: "flex-end",
-//   },
-//   transaction: {
-//
-//   },
-//   recent: {
-//
-//   },
-//   budget: {
-//             marginTop: 10,
-//       marginLeft: 12,
-//       marginRight: 12,
-//       backgroundColor: 'white',
-//         padding: 20,
-//         marginBottom:50,
-//   },
-//   half:  {
-//       flex: 2,
-//       flexDirection: "row",
-//   },
-//     halfb:  {
-//       flex: 2,
-//       flexDirection: "row",
-//       borderWidth: 1,
-//       borderColor: "#545454",
-//       borderBottomWidth: 0,
-//       borderLeftWidth: 0,
-//       borderRightWidth: 0,
-//   },
-//      halfbg:  {
-//       flex: 2,
-//       flexDirection: "row",
-//       borderWidth: 1,
-//       borderColor: "#545454",
-//       borderBottomWidth: 0,
-//       borderLeftWidth: 0,
-//       borderRightWidth: 0,
-//       paddingTop: 20,
-//   },
-//        halfg:  {
-//       flex: 2,
-//       flexDirection: "row",
-//
-//       paddingTop: 20,
-//   },
-//   alert: {
-//       backgroundColor: '#ffae1a',
-//       padding: 5,
-//       paddingLeft: 7,
-//       paddingRight: 7,
-//       borderWidth: 1,
-//       borderRadius: 2,
-//       borderColor: "#FFC04D",
-//   },
-//   alrtmsg: {
-//       lineHeight: 17,
-//       color: "white"
-//   },
-//   bodymsg: {
-//       color: "#545454"
-//   },
-//     bodymsghf: {
-//       color: "#545454"
-//   },
-//     bodymsghfr: {
-//       color: "green",
-//       textAlign: "right",
-//   },
-//   redmsg :{
-//             color: "red",
-//       textAlign: "right",
-//   },
-//   smmsg: {
-//       fontSize: 12,
-//       color: "#bdbdbd",
-//   },
-//   bluebtn: {
-//       color: "#0cb2f2",
-//   },
-//   money: {
-//       fontSize:12,
-//       color: "green"
-//   }
-// })
-//
-// export default class TransactionsPage extends Component {
-//
-//     constructor(props) {
-//     super(props);
-//     this.state = {
-//       progress: 0,
-//     };
-//   }
-//
-//
-//   render() {
-//           setTimeout((function() {
-//       this.setState({ progress: this.state.progress + (0.4 * Math.random())});
-//     }).bind(this), 2000);
-//
-//     return(
-//       <ScrollView style={styles.container}>
-//       <View style={styles.subconts}>
-//         <View style={styles.half}>
-//         <Text style={styles.headerl}>Alerts</Text>
-//         <View style={styles.Tab}></View>
-//         <View style={styles.alert}>
-//         <Text style={styles.alrtmsg}>2</Text>
-//         </View>
-//         </View>
-//         <Text style={styles.bodymsg}>Suspicious login detected from 192.168.2.1{"\n"}You can't afford to live in Vancouver yet</Text>
-//       </View>
-//       <View style={styles.subconts}>
-//         <Text style={styles.header}>transactions</Text>
-//         <View style={styles.halfb}>
-//             <Text style={styles.bodymsghf}>{"\n"}Checking{"\n\n"}Savings{"\n\n"}AMEX Black</Text>
-//             <View style={styles.Tab}></View>
-//             <Text style={styles.bodymsghfr}>{"\n"}$2,736{"\n\n"}$6,666{"\n\n"}<Text style={styles.redmsg}>$293,736</Text></Text>
-//         </View>
-//       </View>
-//       <View style={styles.subconts}>
-//         <Text style={styles.header}>Recent Transactions</Text>
-//         <View style={styles.halfb}>
-//             <Text style={styles.bodymsghf}>{"\n"}Cafe Perugia{"\n"}<Text style={styles.smmsg}>Restaurants</Text>{"\n\n"}McDonald's{"\n"}<Text style={styles.smmsg}>Restaurants</Text>{"\n\n"}Reboot Cafe{"\n"}<Text style={styles.smmsg}>Restaurants</Text>{"\n\n"}<Text style={styles.bluebtn}>Clear Recent Transactions </Text></Text>
-//             <Text style={styles.smmsg}></Text>
-//             <View style={styles.Tab}></View>
-//             <Text style={styles.bodymsghfr}>{"\n"}$11.12{"\n\n\n"}$6.33{"\n\n\n"}$9.29</Text>
-//         </View>
-//
-//       </View>
-//       <View style={styles.budget}>
-//         <Text style={styles.header}>Budget</Text>
-//         <View style={styles.halfbg}>
-//             <Text style={styles.bodymsg}>Entertainment</Text>
-//             <View style={styles.Tab}></View>
-//         <Text style={styles.money}>$27 out of $120</Text>
-//         </View>
-//         <ProgressBar
-//           fillStyle={{height: 40, backgroundColor: "green"}}
-//           backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
-//           style={{marginTop: 0, width: 349, height: 40}}
-//           progress={this.state.progress}
-//         />
-//         <View style={styles.halfg}>
-//             <Text style={styles.bodymsg}>Restaurants</Text>
-//             <View style={styles.Tab}></View>
-//         <Text style={styles.money}>$27 out of $120</Text>
-//         </View>
-//         <ProgressBar
-//           fillStyle={{height: 40, backgroundColor: "green"}}
-//           backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
-//           style={{marginTop: 0, width: 349, height: 40}}
-//           progress={this.state.progress}
-//         />
-//
-//       </View>
-//
-//       </ScrollView>
-//     );
-//   }
-//
-// }

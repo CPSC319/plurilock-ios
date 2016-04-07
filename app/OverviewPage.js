@@ -15,26 +15,21 @@ import React, {
   ListView,
   PanResponder,
   TextInput,
-  Modal
+  Modal,
+  ProgressViewIOS,
+  RefreshControl
 } from 'react-native';
 
 import {GestureLogger} from 'NativeModules'
 import Swipeout from 'react-native-swipeout'
 import ServerConnection from './ServerConnection'
+import accounts from './Accounts'
+import transactions from './Transactions'
+import budgets from './Budgets'
 
 var ProgressBar = require('react-native-progress-bar');
 
-var accounts = [
-  ["BMO Chequing", 6700],
-  ["TD Savings", 15000],
-  ["AMEX Black", 293000]
-]
-
-var recentTransactions = [
-  ["Starbucks Coffee", 4.76, "Restaurants"],
-  ["Apple iPhone 6S", 1029.99, "Electronics"],
-  ["Scotiabank Theatre", 12.99, "Entertainment"]
-]
+var recentTransactions = transactions.slice(transactions.length-3,transactions.length)
 
 const styles = StyleSheet.create({
   container: {
@@ -110,6 +105,13 @@ Tab:{
   flexDirection: 'row',
   flex: 1,
   width:200,
+  justifyContent: 'space-between',
+  padding:5,
+},
+Tab2:{
+  flexDirection: 'row',
+  flex: 1,
+  width:100,
   justifyContent: 'space-between',
   padding:5,
 },
@@ -321,12 +323,25 @@ var innerContainerTransparentStyle = this.state.transparent
             dataSource={this.state.dataSource}
             renderRow={this.renderRow}
             renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} />}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh.bind(this)} />
+            }
             stickyHeaderIndices={[]}
             {...this._panResponder.panHandlers}
           />
           </View>
 
       );
+    }
+
+    _onRefresh() {
+      this.setState({refreshing: true})
+      recentTransactions = transactions.slice(transactions.length-3,transactions.length)
+      this.setState(this.state)
+      this.setState({refreshing: false})
+
     }
 
     renderSectionHeader(rowData, sectionID, rowID) {
@@ -363,6 +378,7 @@ var innerContainerTransparentStyle = this.state.transparent
       )
     }
 
+
     addAccount() {
       this._setModalVisible(true)
     }
@@ -381,9 +397,11 @@ var innerContainerTransparentStyle = this.state.transparent
     renderRecentTransactionSection() {
       return (
         <View style={styles.sectionHeader}>
+        <View style={{flex: 2, flexDirection: "row"}}>
         <Text style={styles.sectionHeaderText}>
           {'Recent Transactions'}
         </Text>
+        </View>
         <View style={styles.sectionHeaderSeparator}></View>
         </View>
       )
@@ -393,7 +411,7 @@ var innerContainerTransparentStyle = this.state.transparent
       return (
         <View style={styles.sectionHeader}>
         <Text style={styles.sectionHeaderText}>
-          {'Monthly Budget '}
+          {'Total Budget '}
         </Text>
         <View style={styles.sectionHeaderSeparator}></View>
         </View>
@@ -403,15 +421,15 @@ var innerContainerTransparentStyle = this.state.transparent
     renderRow(rowData: string) {
 
 
-      if (rowData.section === 0) {
-        return this.renderAlert()
-      }
+      // if (rowData.section === 0) {
+      //   return this.renderAlert()
+      // }
 
-      if (rowData.section === 1) {
+      if (rowData.section === 0) {
         return this.renderAccountRows(rowData)
       }
 
-      if (rowData.section === 2) {
+      if (rowData.section === 1) {
         return this.renderRecentTransactionRows(rowData)
       }
 
@@ -468,21 +486,34 @@ var innerContainerTransparentStyle = this.state.transparent
       // setTimeout((function() {
       //   this.setState({ progress: this.state.progress + 0.0000001});
       // }).bind(this), 2000);
+      var totalBudget = 0;
+      var alreadySpent = 0;
+      for (let i = 0; i<budgets.length; i++) {
 
+        for (let j = 0; j<transactions.length; j++) {
+            if (transactions[j][2] == budgets[i][0]) {
+              alreadySpent += transactions[j][1]
+            }
+        }
+
+        totalBudget += budgets[i][1]
+
+      }
+
+      var progress = alreadySpent/totalBudget
+      var color = "green"
+      if (progress > 1) {
+        color = "red"
+      }
 
       return (
               <View style={styles.budget}  >
               <View style={styles.halfbg}>
-                  <Text style={styles.bodymsg}>March Budget</Text>
+                  <Text style={styles.bodymsg}>Total Budget</Text>
                   <View style={styles.Tab}></View>
-              <Text style={styles.money}>$324 out of $720</Text>
+              <Text style={styles.money}>${alreadySpent.toFixed(0)} out of ${totalBudget.toFixed(0)}</Text>
               </View>
-              <ProgressBar
-                fillStyle={{height: 40, backgroundColor: "green"}}
-                backgroundStyle={{backgroundColor: '#cccccc', borderRadius: 2}}
-                style={{marginTop: 0, width: 315, height: 40}}
-                progress={0.45}
-              />
+              <ProgressViewIOS style={{marginTop: 0, width: 315, height: 40}} progressTintColor={color} progress={progress}/>
               </View>
       )
     }
@@ -522,20 +553,20 @@ var innerContainerTransparentStyle = this.state.transparent
 
       var listLength = accounts.length+1;
 
-      for (let ii = 0; ii < 4; ii++) {
-        if (ii === 0) {
-          listLength = 1
-        }
+      for (let ii = 0; ii < 3; ii++) {
+        // if (ii === 0) {
+        //   listLength = 1
+        // }
 
-        if (ii === 1) {
+        if (ii === 0) {
           listLength = accounts.length+1;
         }
 
-        if (ii === 2) {
+        if (ii === 1) {
           listLength = recentTransactions.length+1
         }
 
-        if (ii === 3) {
+        if (ii === 2) {
           listLength = 2
         }
           dataBlob[ ii ] = new Array(listLength);
