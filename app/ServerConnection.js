@@ -1,4 +1,3 @@
-import DeviceInfo from "react-native-device-info";
 import {AlertIOS} from 'react-native'
 var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
 
@@ -29,6 +28,7 @@ console.log("Device Name: " + DeviceInfo.getDeviceName());
 console.log("Device Locale: " + DeviceInfo.getDeviceLocale());
 
   ws.send(JSON.stringify(deviceData));
+
 };
 
  ws.onmessage = (e) => {
