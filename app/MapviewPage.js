@@ -13,6 +13,7 @@ import React, {
   View,
   Component,
   Dimensions,
+  NetInfo,
   PanResponder,
   AlertIOS
 } from 'react-native';
@@ -27,6 +28,8 @@ var region_init = {
 }
 import {GestureLogger} from 'NativeModules'
 import ServerConnection from './ServerConnection'
+import Queue from './Queue'
+var q = new Queue.Queue();
 let mySelf
 
 export default class MapviewPage extends Component {
@@ -61,8 +64,22 @@ export default class MapviewPage extends Component {
          "domain":"team2",
          "data":callback
        }
-
-       ServerConnection.send(JSON.stringify(data));
+       NetInfo.isConnected.fetch().then(isConnected => {
+          if (!isConnected){
+            console.log("Caching data for into the queue");
+            q.enqueue(data);
+          } else {
+            while (q.size() != 0){
+              var prevData = q.dequeue();
+              console.log("Dequeuing from queue. Sending data.")
+              ServerConnection.send(JSON.stringify(prevData));
+              console.log("Data transmission complete.")
+            }
+            ServerConnection.send(JSON.stringify(data));
+            console.log("Sending data");
+            console.log("QUEUE SIZE IS "+ q.size());
+          }
+       });
          })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
@@ -101,7 +118,22 @@ export default class MapviewPage extends Component {
          "data":position["coords"]
         };
         console.log(JSON.stringify(mapdata));
-        ServerConnection.send(JSON.stringify(mapdata));
+       NetInfo.isConnected.fetch().then(isConnected => {
+          if (!isConnected){
+            console.log("Caching data for into the queue");
+            q.enqueue(data);
+          } else {
+            while (q.size() != 0){
+              var prevData = q.dequeue();
+              console.log("Dequeuing from queue. Sending data.")
+              ServerConnection.send(JSON.stringify(prevData));
+              console.log("Data transmission complete.")
+            }
+            ServerConnection.send(JSON.stringify(mapdata));
+            console.log("Sending data");
+            console.log("QUEUE SIZE IS "+ q.size());
+          }
+       });
 
       },
       (error) => alert(error.message),

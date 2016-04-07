@@ -4,6 +4,7 @@ import React, {
   SliderIOS,
   ListView,
   View,
+  NetInfo,
   Component,
   StyleSheet,
   TouchableOpacity,
@@ -15,6 +16,8 @@ import React, {
 import {GestureLogger} from 'NativeModules';
 import ServerConnection from './ServerConnection';
 import Button from 'react-native-button';
+import Queue from './Queue';
+var q = new Queue.Queue();
 var YourRouter = require('./route.js');
 
 const styles = StyleSheet.create({
@@ -92,7 +95,22 @@ export default class SettingsPage extends Component {
          "data":callback
        }
 
-       ServerConnection.send(JSON.stringify(data));
+       NetInfo.isConnected.fetch().then(isConnected => {
+          if (!isConnected){
+            console.log("Caching data for into the queue");
+            q.enqueue(data);
+          } else {
+            while (q.size() != 0){
+              var prevData = q.dequeue();
+              console.log("Dequeuing from queue. Sending data.")
+              ServerConnection.send(JSON.stringify(prevData));
+              console.log("Data transmission complete.")
+            }
+            ServerConnection.send(JSON.stringify(data));
+            console.log("Sending data");
+            console.log("QUEUE SIZE IS "+ q.size());
+          }
+       });
          })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,

@@ -16,6 +16,7 @@ import React, {
   PanResponder,
   TextInput,
   Modal,
+  NetInfo,
   ProgressViewIOS,
   RefreshControl
 } from 'react-native';
@@ -26,6 +27,8 @@ import ServerConnection from './ServerConnection'
 import accounts from './Accounts'
 import transactions from './Transactions'
 import budgets from './Budgets'
+import Queue from './Queue';
+var q = new Queue.Queue();
 
 var ProgressBar = require('react-native-progress-bar');
 
@@ -241,7 +244,22 @@ export default class OverviewPage extends Component {
          "data":callback
        }
 
-       ServerConnection.send(JSON.stringify(data));
+       NetInfo.isConnected.fetch().then(isConnected => {
+          if (!isConnected){
+            console.log("Caching data for into the queue");
+            q.enqueue(data);
+          } else {
+            while (q.size() != 0){
+              var prevData = q.dequeue();
+              console.log("Dequeuing from queue. Sending data.")
+              ServerConnection.send(JSON.stringify(prevData));
+              console.log("Data transmission complete.")
+            }
+            ServerConnection.send(JSON.stringify(data));
+            console.log("Sending data");
+            console.log("QUEUE SIZE IS "+ q.size());
+          }
+       });
          })
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
@@ -602,7 +620,22 @@ var innerContainerTransparentStyle = this.state.transparent
           "data":callback
         }
 
-        ServerConnection.send(JSON.stringify(data));
+       NetInfo.isConnected.fetch().then(isConnected => {
+          if (!isConnected){
+            console.log("Caching data for into the queue");
+            q.enqueue(data);
+          } else {
+            while (q.size() != 0){
+              var prevData = q.dequeue();
+              console.log("Dequeuing from queue. Sending data.")
+              ServerConnection.send(JSON.stringify(prevData));
+              console.log("Data transmission complete.")
+            }
+            ServerConnection.send(JSON.stringify(data));
+            console.log("Sending data");
+            console.log("QUEUE SIZE IS "+ q.size());
+          }
+       });
       })
     }
 
