@@ -239,7 +239,7 @@ export default class OverviewPage extends Component {
        var data = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":username,
+         "userID":username+"_Touch",
          "domain":"team2",
          "data":callback
        }
@@ -531,7 +531,7 @@ var innerContainerTransparentStyle = this.state.transparent
                   <View style={styles.Tab}></View>
               <Text style={styles.money}>${alreadySpent.toFixed(0)} out of ${totalBudget.toFixed(0)}</Text>
               </View>
-              <ProgressViewIOS style={{marginTop: 0, width: 315, height: 40}} progressTintColor={color} progress={progress}/>
+              <ProgressViewIOS style={{marginTop: 0, height: 40}} progressTintColor={color} progress={progress}/>
               </View>
       )
     }
@@ -611,11 +611,15 @@ var innerContainerTransparentStyle = this.state.transparent
     onKeyPress(e) {
       GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key, (callback) => {
         console.log("sending to server: ",callback)
+        var username = "TestUser"
+        if (this.props.parentProps.username != '') {
+          username = this.props.parentProps.username
+        }
 
         var data = {
           "btClientType": "iOS",
           "btClientVersion":"1.0",
-          "userID":"Bruce",
+          "userID":username+"_Key",
           "domain":"team2",
           "data":callback
         }

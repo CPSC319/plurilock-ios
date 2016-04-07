@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * on the same Wi-Fi network.
      */
     
-    let jsCodeLocation = NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios&dev=true")
+let jsCodeLocation = NSURL(string: "http://localhost:8081/index.ios.bundle?platform=ios&dev=true")
     
     
     /**

@@ -60,7 +60,7 @@ export default class MapviewPage extends Component {
        var data = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":username,
+         "userID":username+"_MapView",
          "domain":"team2",
          "data":callback
        }
@@ -113,7 +113,7 @@ export default class MapviewPage extends Component {
         var mapdata = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":username,
+         "userID":username+"_MapCoords",
          "domain":"team2",
          "data":position["coords"]
         };

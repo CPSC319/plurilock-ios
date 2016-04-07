@@ -90,7 +90,7 @@ export default class SettingsPage extends Component {
        var data = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":username,
+         "userID":username+"_Touch",
          "domain":"team2",
          "data":callback
        }

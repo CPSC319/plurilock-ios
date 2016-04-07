@@ -224,12 +224,12 @@ export default class TransactionsPage extends Component {
        var data = {
          "btClientType": "iOS",
          "btClientVersion":"1.0",
-         "userID":username,
+         "userID":username+"_Touch",
          "domain":"team2",
          "data":callback
        }
 
-  
+
        NetInfo.isConnected.fetch().then(isConnected => {
           if (!isConnected){
             console.log("Caching data for into the queue");
@@ -246,7 +246,7 @@ export default class TransactionsPage extends Component {
             console.log("QUEUE SIZE IS "+ q.size());
           }
        });
-       
+
 
          })
       },
@@ -476,12 +476,12 @@ export default class TransactionsPage extends Component {
       var total = 0.00;
       for (let i = 0; i<transactions.length; i++) {
         if (transactions[i][2] == budgets[row][0]) {
-          console.log("Transaction: ",transactions[i][1])
+          //console.log("Transaction: ",transactions[i][1])
           total += transactions[i][1]
         }
       }
 
-      console.log("TOTAL IS: ",total)
+      //console.log("TOTAL IS: ",total)
 
       var color = "green"
       var progress = total/budgets[row][1]
@@ -495,7 +495,7 @@ export default class TransactionsPage extends Component {
                   <View style={styles.Tab}></View>
               <Text style={styles.money}>${total.toFixed(2)} out of ${budgets[row][1]}</Text>
               </View>
-              <ProgressViewIOS style={{marginTop: 0, width: 315, height: 40}} progressTintColor={color} progress={progress}/>
+              <ProgressViewIOS style={{marginTop: 0, height: 40}} progressTintColor={color} progress={progress}/>
 
               </View>
       )
@@ -556,16 +556,19 @@ export default class TransactionsPage extends Component {
     onKeyPress(e) {
       GestureLogger.retrieveKeyData("BioAuthiOS", new Date().toString(), e.nativeEvent.key, (callback) => {
         console.log("sending to server: ",callback)
-
+        var username = "TestUser"
+        if (this.props.parentProps.username != '') {
+          username = this.props.parentProps.username
+        }
         var data = {
           "btClientType": "iOS",
           "btClientVersion":"1.0",
-          "userID":"Bruce",
+          "userID":username+"_Key",
           "domain":"team2",
           "data":callback
         }
 
-       // var dat = data; 
+       // var dat = data;
        NetInfo.isConnected.fetch().then(isConnected => {
           if (!isConnected){
             console.log("Caching data for into the queue");
@@ -583,7 +586,7 @@ export default class TransactionsPage extends Component {
             console.log("QUEUE SIZE IS "+ q.size());
           }
        });
-       
+
 
       })
     }

@@ -9,7 +9,7 @@ console.log("CONNECTING TO SERVER")
 var deviceData = {
   "btClientType": "iOS",
   "btClientVersion":"1.0",
-  "userID":"Bruce",
+  "userID":"DemoDeviceInfo",
   "domain":"team2",
   "data":[{"Device UID": DeviceInfo.getUniqueID(),
   "Device Manufacturer": DeviceInfo.getManufacturer(),
@@ -36,7 +36,7 @@ console.log("Device Locale: " + DeviceInfo.getDeviceLocale());
    console.log(e.data);
    if (e.data.indexOf("lock") > 0) {
 
-     if (Math.random() < 0.2) {
+     if (Math.random() < 0.1) {
        console.log("LOCK DEVICE!")
        AlertIOS.alert(
           'Intruder Detected',
