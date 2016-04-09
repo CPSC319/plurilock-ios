@@ -1,6 +1,6 @@
 import {AlertIOS} from 'react-native'
 import DeviceInfo from 'react-native-device-info'
-var ws = new WebSocket('ws://betdemo.plurilock.com:8095')
+var ws = new WebSocket('ws://btdemo.plurilock.com:8095')
 
 ws.onopen = () => {
   // connection opened
