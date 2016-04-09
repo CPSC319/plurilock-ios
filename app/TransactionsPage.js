@@ -238,15 +238,21 @@ export default class TransactionsPage extends Component {
             console.log("Caching data for into the queue");
             q.enqueue(data);
           } else {
-            while (q.size() != 0){
+            while (q.size() > 0){
+              console.log("QUEUE SIZE IS "+ q.size());
               var prevData = q.dequeue();
               console.log("Dequeuing from queue. Sending data.")
               ServerConnection.send(JSON.stringify(prevData));
               console.log("Data transmission complete.")
             }
-            ServerConnection.send(JSON.stringify(data));
+            var errorcode = ServerConnection.send(JSON.stringify(data));
             console.log("Sending data");
             console.log("QUEUE SIZE IS "+ q.size());
+            if (errorcode == 1){
+              q.enqueue(data);
+              console.log("ERROR> QUEING DATA")
+            }
+
           }
        });
 
@@ -587,9 +593,14 @@ export default class TransactionsPage extends Component {
               ServerConnection.send(JSON.stringify(prevData));
               console.log("Data transmission complete.")
             }
-            ServerConnection.send(JSON.stringify(data));
+            var errorcode = ServerConnection.send(JSON.stringify(data));
             console.log("Sending data");
             console.log("QUEUE SIZE IS "+ q.size());
+            if (errorcode == 1){
+              q.enqueue(data);
+              console.log("ERROR> QUEING DATA")
+            }
+
           }
        });
 
